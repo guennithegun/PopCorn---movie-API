@@ -25,6 +25,15 @@ http.createServer((request, response) => {
     }
   });
 
-  response.writeHead(200, {'Content-Type': 'text/html'}); // response
-  response.end(filePath);
+  fs.readFile(filePath, function(err, data) {
+    if (err) {
+      throw err;
+    }
+
+    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.end(data);
+
+  });
+  /*response.writeHead(200, {'Content-Type': 'text/html'}); // response
+  response.end(filePath);*/
 }).listen(8080);
