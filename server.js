@@ -9,10 +9,10 @@ http.createServer((request, response) => {
       filePath = '',                        // empty variable for pathname
       timeStamp = new Date();               // timestamp to print in log.txt
 
-  if (q.pathname == 'documentation') {      // if condition to check if pathname includes "documentation" or not
-    filePath = q.pathname;
+  if (q.pathname.includes('documentation')) {      // if condition to check if pathname includes "documentation" or not
+    filePath = (__dirname + '/documentation.html');
   } else {
-    filePath = 'index.html'
+    filePath = 'index.html';
   }
 
   // writing the URL an Timestamp of the rewuest into log.txt
@@ -25,6 +25,7 @@ http.createServer((request, response) => {
     }
   });
 
+  // return the file back to user
   fs.readFile(filePath, function(err, data) {
     if (err) {
       throw err;
@@ -32,8 +33,5 @@ http.createServer((request, response) => {
 
     response.writeHead(200, { 'Content-Type': 'text/plain' });
     response.end(data);
-
   });
-  /*response.writeHead(200, {'Content-Type': 'text/html'}); // response
-  response.end(filePath);*/
 }).listen(8080);
