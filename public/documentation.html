@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Documentation</title>
+  <!-- IS TO PUT IN SEPERATE CSS FILES LATER -->
+  <style>
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
 </head>
 <body>
   <h1>PopCorn</h1>
@@ -18,5 +30,188 @@
     <br>
     On serverside the web app will showcase a well-designed API and architected database built using JavaScript, Node.js, Express and MongoDB.
   </p>
+  <!-- DOCUMENTATION -->
+  <h2>Documentation</h2>
+  <!-- MOVIE TABLE -->
+  <table>
+    <caption><h2>Movie Data</h2></caption>
+    <thead>
+      <tr>
+        <th>REQUEST</th>
+        <th>URL</th>
+        <th>HTTP METHOD</th>
+        <th>REQUEST BODY DATA FORMAT</th>
+        <th>RESPONSE BODY DATA FORMAT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Get list of all movies</td>
+        <td>/user/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>JSON object holding data about all movies</td>
+      </tr>
+      <tr>
+        <td>Get single movie by title or get movies filtered by genre</td>
+        <td>
+          /user/movies/[title]/[genre]<br>
+          <br>
+          Example by title:<br>
+          /user/movies/Snatch/:genre
+        </td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          JSON object holding data about single movie, containing an ID, title, description, genre, director, image URL<br>
+          <br>
+          {<br>
+          id : 1,<br>
+          title : 'Snatch',<br>
+          description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+          genre: ['comedy', 'crime'],<br>
+          director : 'Guy Ritchie',<br>
+          imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Get data on single director</td>
+        <td>
+          /directors/[director]<br>
+          <br>
+          Example:<br>
+          /directors/Christopher Nolan
+        </td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          JSON object holding data about single director, containing an ID, name, bio, year of birth, died<br>
+          <br>
+          {<br>
+          id : 1,<br>
+          name : 'Christopher Nolan',<br>
+          bio: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+          bio : 'https://www.imdb.com/name/nm0634240/bio?ref_=nm_ov_bio_sm',<br>
+          born : 1970,<br>
+          died : 'n/a'<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Add a movie to list</td>
+        <td>
+          /user/movies
+        </td>
+        <td>POST</td>
+        <td>
+          JSON object holding data about the movie to add, structured like:<br>
+          <br>
+          {<br>
+            title : 'Snatch',<br>
+            description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+            genre: ['comedy', 'crime'],<br>
+            director : 'Guy Ritchie',<br>
+            imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+          }
+        </td>
+        <td>
+          JSON object holding data about the movie to add, structured like:<br>
+          <br>
+          {<br>
+            id : '1',<br>
+            title : 'Snatch',<br>
+            description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+            genre: ['comedy', 'crime'],<br>
+            director : 'Guy Ritchie',<br>
+            imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Delete a movie from list by ID</td>
+        <td>
+          /user/movies/[id]<br>
+          <br>
+          Example:<br>
+          /user/movies/3
+        </td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>
+          A text message indicating whether the movie was successfully removed.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- USER TABLE -->
+  <table>
+    <caption><h2>User Data</h2></caption>
+    <thead>
+      <tr>
+        <th>REQUEST</th>
+        <th>URL</th>
+        <th>HTTP METHOD</th>
+        <th>REQUEST BODY DATA FORMAT</th>
+        <th>RESPONSE BODY DATA FORMAT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Create new User</td>
+        <td>/user</td>
+        <td>POST</td>
+        <td>
+          JSON object holding data about the user to add, structured like:<br>
+          <br>
+          {<br>
+          username: ‚Peter Polanski‘,<br>
+          password: ‚XXXXXXX‘,<br>
+          email: ‚polanski@example.com',<br>
+          date of birth: 1985 <br>
+          }
+        </td>
+        <td>
+          JSON object holding data about the user to add, structured like:<br>
+          <br>
+          {<br>
+          id : '2', <br>
+          username: ‚Peter Polanski‘,<br>
+          password: ‚XXXXXXX‘,<br>
+          email: ‚polanski@example.com',<br>
+          date of birth: 1985 <br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Update User Data</td>
+        <td>
+          /user/[username]/[password]/[email]/[date of birth]<br>
+          <br>
+          Example:<br>
+          /user/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
+        </td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>
+          A text message indicating the user, username, password, email and date of birth that was updated.
+        </td>
+      </tr>
+      <tr>
+        <td>Delete User</td>
+        <td>
+          /user/[id]<br>
+          <br>
+          Example:<br>
+          /user/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
+        </td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>
+          A text message indicating whether the user was successfully removed.
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
