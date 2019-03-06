@@ -204,12 +204,12 @@ app.get('/user/movies', function(req, res) {
 
 // returns JSON object of single movie by title to user
 app.get('/user/movies/:title/:genre', (req, res) => {
-  console.log( require('util').inspect( req.params) );
+  console.log( require('util').inspect( req.params) );    // for testing purposes!!! NEEDS TO BE DELETED IN FINAL VERSION
   let title = topMovies.find((movie) => {
     return movie.title === req.params.title
   });
   let genre = topMovies.filter(function(obj) {
-    return obj.genre.includes(req.params.genre)
+    return obj.genre.includes(req.params.genre.toLowerCase())
   });
 
   if (title) {
