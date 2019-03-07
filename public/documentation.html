@@ -47,44 +47,62 @@
     <tbody>
       <tr>
         <td>Get list of all movies</td>
-        <td>/user/movies</td>
+        <td>/movies</td>
         <td>GET</td>
         <td>None</td>
         <td>JSON object holding data about all movies</td>
       </tr>
       <tr>
-        <td>Get single movie by title or get movies filtered by genre</td>
+        <td>Get single movie by title</td>
         <td>
-          /user/movies/[title]/[genre]<br>
+          /movies/[title]<br>
           <br>
-          Example by title:<br>
-          /user/movies/Snatch/:genre<br>
-          <br>
-          Example by genre:<br>
-          /user/movies/:tile/comedy
+          Example:<br>
+          /movies/Snatch
         </td>
         <td>GET</td>
         <td>None</td>
         <td>
-          JSON object holding data about single movie or list of movies by genre, containing an ID, title, description, genre, director, image URL<br>
+          JSON object holding data about single movie containing an ID, title, description, genre, director, image URL<br>
           <br>
-          Response by title:<br>
           {<br>
           id : 1,<br>
           title : 'Snatch',<br>
           description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
           genre: ['comedy', 'crime'],<br>
-          director : 'Guy Ritchie',<br>
+          director : {<br>
+            name : 'Guy Ritchie',<br>
+            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+            born : 1968,<br>
+            died : 'n/a'<br>
+          },<br>
           imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
-          }<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Get movies by genre</td>
+        <td>
+          /movies/genres/[genre]<br>
           <br>
-          Response by genre:<br>
+          Example:<br>
+          /movies/genres/comedy
+        </td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          JSON object holding data about all movies of that genre containing an ID, title, description, genre, director, image URL<br>
           {<br>
           id : 1,<br>
           title : 'Snatch',<br>
           description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
           genre: ['comedy', 'crime'],<br>
-          director : 'Guy Ritchie',<br>
+          director : {<br>
+            name : 'Guy Ritchie',<br>
+            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+            born : 1968,<br>
+            died : 'n/a'<br>
+          },<br>
           imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
           },<br>
           <br>
@@ -93,13 +111,59 @@
           title : 'Lock, Stock & Two Smoking Barrels',<br>
           description: 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.’,<br>
           genre: ['comedy', 'crime'],<br>
-          director : 'Guy Ritchie',<br>
+          director : {<br>
+            name : 'Guy Ritchie',<br>
+            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+            born : 1968,<br>
+            died : 'n/a'<br>
+          },<br>
           imageURL: 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032'<br>
           }
         </td>
       </tr>
       <tr>
-        <td>Get data on single director</td>
+        <td>Get movies by director</td>
+        <td>
+          /movies/directors/[director]<br>
+          <br>
+          Example:<br>
+          /movies/directors/Guy Ritchie
+        </td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          JSON object holding data about all movies of that director containing an ID, title, description, genre, director, image URL<br>
+          {<br>
+          id : 1,<br>
+          title : 'Snatch',<br>
+          description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+          genre: ['comedy', 'crime'],<br>
+          director : {<br>
+            name : 'Guy Ritchie',<br>
+            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+            born : 1968,<br>
+            died : 'n/a'<br>
+          },<br>
+          imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+          },<br>
+          <br>
+          {<br>
+          id : 2,<br>
+          title : 'Lock, Stock & Two Smoking Barrels',<br>
+          description: 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.’,<br>
+          genre: ['comedy', 'crime'],<br>
+          director : {<br>
+            name : 'Guy Ritchie',<br>
+            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+            born : 1968,<br>
+            died : 'n/a'<br>
+          },<br>
+          imageURL: 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032'<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Get director details</td>
         <td>
           /directors/[director]<br>
           <br>
@@ -109,10 +173,9 @@
         <td>GET</td>
         <td>None</td>
         <td>
-          JSON object holding data about single director, containing an ID, name, bio, year of birth, died<br>
+          JSON object holding data about single director, containing name, bio, year of birth, died<br>
           <br>
           {<br>
-          id : 1,<br>
           name : 'Christopher Nolan',<br>
           bio: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
           bio : 'https://www.imdb.com/name/nm0634240/bio?ref_=nm_ov_bio_sm',<br>
@@ -124,7 +187,7 @@
       <tr>
         <td>Add a movie to list</td>
         <td>
-          /user/movies
+          /movies
         </td>
         <td>POST</td>
         <td>
@@ -134,7 +197,12 @@
             title : 'Snatch',<br>
             description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
             genre: ['comedy', 'crime'],<br>
-            director : 'Guy Ritchie',<br>
+            director : {<br>
+              name : 'Guy Ritchie',<br>
+              bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+              born : 1968,<br>
+              died : 'n/a'<br>
+            },<br>
             imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
           }
         </td>
@@ -146,7 +214,12 @@
             title : 'Snatch',<br>
             description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
             genre: ['comedy', 'crime'],<br>
-            director : 'Guy Ritchie',<br>
+            director : {<br>
+              name : 'Guy Ritchie',<br>
+              bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
+              born : 1968,<br>
+              died : 'n/a'<br>
+            },<br>
             imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
           }
         </td>
@@ -154,10 +227,10 @@
       <tr>
         <td>Delete a movie from list by ID</td>
         <td>
-          /user/movies/[id]<br>
+          /movies/[id]<br>
           <br>
           Example:<br>
-          /user/movies/3
+          /movies/3
         </td>
         <td>DELETE</td>
         <td>None</td>
@@ -182,7 +255,7 @@
     <tbody>
       <tr>
         <td>Create new User</td>
-        <td>/user</td>
+        <td>/users</td>
         <td>POST</td>
         <td>
           JSON object holding data about the user to add, structured like:<br>
@@ -209,10 +282,10 @@
       <tr>
         <td>Update User Data</td>
         <td>
-          /user/[username]/[password]/[email]/[date of birth]<br>
+          /users/[username]/[password]/[email]/[date of birth]<br>
           <br>
           Example:<br>
-          /user/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
+          /users/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
         </td>
         <td>PUT</td>
         <td>None</td>
@@ -223,10 +296,10 @@
       <tr>
         <td>Delete User</td>
         <td>
-          /user/[id]<br>
+          /users/[id]<br>
           <br>
           Example:<br>
-          /user/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
+          /users/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
         </td>
         <td>DELETE</td>
         <td>None</td>
