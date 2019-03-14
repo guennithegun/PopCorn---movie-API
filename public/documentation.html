@@ -67,16 +67,24 @@
           <br>
           {<br>
           id : 1,<br>
-          title : 'Snatch',<br>
-          description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
-          genre: ['comedy', 'crime'],<br>
-          director : {<br>
-            name : 'Guy Ritchie',<br>
-            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-            born : 1968,<br>
-            died : 'n/a'<br>
+          Title : 'Snatch',<br>
+          Description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+          Genre: {<br>
+            Name: 'Comedy'<br>
+            Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
           },<br>
-          imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+          Director : {<br>
+            Name : 'Guy Ritchie',<br>
+            Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+            Birth : '1968',<br>
+            Death : 'n/a',<br>
+            Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+          },<br>
+          ImagePath: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904',<br>
+          Featured: true,<br>
+          Actors: [ 'Brad Pitt', 'Jason Statham', 'Vinnie Jones', 'Benicio del Toro' ],<br>
+          IMDBRating: '8.3',<br>
+          ReleaseYear: '2000'<br>
           }
         </td>
       </tr>
@@ -86,39 +94,55 @@
           /movies/genres/[genre]<br>
           <br>
           Example:<br>
-          /movies/genres/comedy
+          /movies/genres/Comedy
         </td>
         <td>GET</td>
         <td>None</td>
         <td>
           JSON object holding data about all movies of that genre containing an ID, title, description, genre, director, image URL<br>
           {<br>
-          id : 1,<br>
-          title : 'Snatch',<br>
-          description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
-          genre: ['comedy', 'crime'],<br>
-          director : {<br>
-            name : 'Guy Ritchie',<br>
-            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-            born : 1968,<br>
-            died : 'n/a'<br>
-          },<br>
-          imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
-          },<br>
+            id : 1,<br>
+            Title : 'Snatch',<br>
+            Description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+            Genre: {<br>
+              Name: 'Comedy'<br>
+              Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
+            },<br>
+            Director : {<br>
+              Name : 'Guy Ritchie',<br>
+              Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+              Birth : '1968',<br>
+              Death : 'n/a',<br>
+              Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+            },<br>
+            ImagePath: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904',<br>
+            Featured: true,<br>
+            Actors: [ 'Brad Pitt', 'Jason Statham', 'Vinnie Jones', 'Benicio del Toro' ],<br>
+            IMDBRating: '8.3',<br>
+            ReleaseYear: '2000'<br>
+          },
           <br>
           {<br>
-          id : 2,<br>
-          title : 'Lock, Stock & Two Smoking Barrels',<br>
-          description: 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.’,<br>
-          genre: ['comedy', 'crime'],<br>
-          director : {<br>
-            name : 'Guy Ritchie',<br>
-            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-            born : 1968,<br>
-            died : 'n/a'<br>
-          },<br>
-          imageURL: 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032'<br>
-          }
+            id : 2,<br>
+            Title : 'Lock, Stock & Two Smoking Barrels',<br>
+            Description: 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.’,<br>
+            Genre: {<br>
+              Name: 'Comedy'<br>
+              Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
+            },<br>
+            Director : {<br>
+              Name : 'Guy Ritchie',<br>
+              Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+              Birth : '1968',<br>
+              Death : 'n/a',<br>
+              Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+            },<br>
+            ImagePath: 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032',<br>
+            Featured: true,<br>
+            Actors: [ 'Jason Statham', 'Vinnie Jones', 'Jason Flemyng', 'Dexter Fletcher' ],<br>
+            IMDBRating: '8.2',<br>
+            ReleaseYear: '1998'<br>
+            }
         </td>
       </tr>
       <tr>
@@ -134,32 +158,48 @@
         <td>
           JSON object holding data about all movies of that director containing an ID, title, description, genre, director, image URL<br>
           {<br>
-          id : 1,<br>
-          title : 'Snatch',<br>
-          description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
-          genre: ['comedy', 'crime'],<br>
-          director : {<br>
-            name : 'Guy Ritchie',<br>
-            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-            born : 1968,<br>
-            died : 'n/a'<br>
-          },<br>
-          imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
-          },<br>
+            id : 1,<br>
+            Title : 'Snatch',<br>
+            Description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+            Genre: {<br>
+              Name: 'Comedy'<br>
+              Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
+            },<br>
+            Director : {<br>
+              Name : 'Guy Ritchie',<br>
+              Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+              Birth : '1968',<br>
+              Death : 'n/a',<br>
+              Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+            },<br>
+            ImagePath: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904',<br>
+            Featured: true,<br>
+            Actors: [ 'Brad Pitt', 'Jason Statham', 'Vinnie Jones', 'Benicio del Toro' ],<br>
+            IMDBRating: '8.3',<br>
+            ReleaseYear: '2000'<br>
+          },
           <br>
           {<br>
-          id : 2,<br>
-          title : 'Lock, Stock & Two Smoking Barrels',<br>
-          description: 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.’,<br>
-          genre: ['comedy', 'crime'],<br>
-          director : {<br>
-            name : 'Guy Ritchie',<br>
-            bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-            born : 1968,<br>
-            died : 'n/a'<br>
-          },<br>
-          imageURL: 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032'<br>
-          }
+            id : 2,<br>
+            Title : 'Lock, Stock & Two Smoking Barrels',<br>
+            Description: 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.’,<br>
+            Genre: {<br>
+              Name: 'Comedy'<br>
+              Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
+            },<br>
+            Director : {<br>
+              Name : 'Guy Ritchie',<br>
+              Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+              Birth : '1968',<br>
+              Death : 'n/a',<br>
+              Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+            },<br>
+            ImagePath: 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032',<br>
+            Featured: true,<br>
+            Actors: [ 'Jason Statham', 'Vinnie Jones', 'Jason Flemyng', 'Dexter Fletcher' ],<br>
+            IMDBRating: '8.2',<br>
+            ReleaseYear: '1998'<br>
+            }
         </td>
       </tr>
       <tr>
@@ -173,14 +213,33 @@
         <td>GET</td>
         <td>None</td>
         <td>
-          JSON object holding data about single director, containing name, bio, year of birth, died<br>
+          JSON object holding data about single director, containing name, bio, year of birth, death and movies<br>
           <br>
           {<br>
-          name : 'Christopher Nolan',<br>
-          bio: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
-          bio : 'https://www.imdb.com/name/nm0634240/bio?ref_=nm_ov_bio_sm',<br>
-          born : 1970,<br>
-          died : 'n/a'<br>
+            Name : 'Christopher Nolan',<br>
+            Bio : 'Christopher Edward Nolan CBE is an English film director, screenwriter, and producer who holds both British and American citizenship.',<br>
+            Birth : 1970,<br>
+            Death : 'n/a',<br>
+            Movies: [ 'Batman Begins', 'The Prestige', 'The Dark Knight' ]<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Get genre details</td>
+        <td>
+          /genres/[genre]<br>
+          <br>
+          Example:<br>
+          /genres/Science-Fiction
+        </td>
+        <td>GET</td>
+        <td>None</td>
+        <td>
+          JSON object holding genre information<br>
+          <br>
+          {<br>
+            Name : 'Science-Fiction',<br>
+            Description: 'Science fiction (often shortened to Sci-Fi or SF) is a genre of speculative fiction, typically dealing with imaginative concepts such as advanced science and technology, space exploration, time travel, and extraterrestrial life. Science fiction often explores the potential consequences of scientific and other innovations, and has been called a literature of ideas.'<br>
           }
         </td>
       </tr>
@@ -194,16 +253,24 @@
           JSON object holding data about the movie to add, structured like:<br>
           <br>
           {<br>
-            title : 'Snatch',<br>
-            description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
-            genre: ['comedy', 'crime'],<br>
-            director : {<br>
-              name : 'Guy Ritchie',<br>
-              bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-              born : 1968,<br>
-              died : 'n/a'<br>
+            Title : 'Snatch',<br>
+            Description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+            Genre: {<br>
+              Name: 'Comedy'<br>
+              Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
             },<br>
-            imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+            Director : {<br>
+              Name : 'Guy Ritchie',<br>
+              Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+              Birth : '1968',<br>
+              Death : 'n/a',<br>
+              Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+            },<br>
+            ImagePath: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904',<br>
+            Featured: true,<br>
+            Actors: [ 'Brad Pitt', 'Jason Statham', 'Vinnie Jones', 'Benicio del Toro' ],<br>
+            IMDBRating: '8.3',<br>
+            ReleaseYear: '2000'<br>
           }
         </td>
         <td>
@@ -211,26 +278,34 @@
           <br>
           {<br>
             id : '1',<br>
-            title : 'Snatch',<br>
-            description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
-            genre: ['comedy', 'crime'],<br>
-            director : {<br>
-              name : 'Guy Ritchie',<br>
-              bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',<br>
-              born : 1968,<br>
-              died : 'n/a'<br>
+            Title : 'Snatch',<br>
+            Description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,<br>
+            Genre: {<br>
+              Name: 'Comedy'<br>
+              Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'<br>
             },<br>
-            imageURL: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'<br>
+            Director : {<br>
+              Name : 'Guy Ritchie',<br>
+              Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',<br>
+              Birth : '1968',<br>
+              Death : 'n/a',<br>
+              Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]<br>
+            },<br>
+            ImagePath: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904',<br>
+            Featured: true,<br>
+            Actors: [ 'Brad Pitt', 'Jason Statham', 'Vinnie Jones', 'Benicio del Toro' ],<br>
+            IMDBRating: '8.3',<br>
+            ReleaseYear: '2000'<br>
           }
         </td>
       </tr>
       <tr>
-        <td>Delete a movie from list by ID</td>
+        <td>Delete a movie from list by Title</td>
         <td>
-          /movies/[id]<br>
+          /movies/[title]<br>
           <br>
           Example:<br>
-          /movies/3
+          /movies/Snatch
         </td>
         <td>DELETE</td>
         <td>None</td>
@@ -261,45 +336,81 @@
           JSON object holding data about the user to add, structured like:<br>
           <br>
           {<br>
-          username: ‚Peter Polanski‘,<br>
-          password: ‚XXXXXXX‘,<br>
-          email: ‚polanski@example.com',<br>
-          date of birth: 1985 <br>
+            Username: ‚Peter Polanski‘,<br>
+            Password: ‚XXXXXXX‘,<br>
+            EMail: ‚polanski@example.com',<br>
+            Birthday: '20.04.1985' <br>
           }
         </td>
         <td>
           JSON object holding data about the user to add, structured like:<br>
           <br>
           {<br>
-          id : '2', <br>
-          username: ‚Peter Polanski‘,<br>
-          password: ‚XXXXXXX‘,<br>
-          email: ‚polanski@example.com',<br>
-          date of birth: 1985 <br>
+            id : '2', <br>
+            Username: ‚Peter Polanski‘,<br>
+            Password: ‚XXXXXXX‘,<br>
+            EMail: ‚polanski@example.com',<br>
+            Birthday: '1985-04-20T00:00:00Z' <br>
           }
         </td>
       </tr>
       <tr>
         <td>Update User Data</td>
         <td>
-          /users/[username]/[password]/[email]/[date of birth]<br>
+          /users/[username]<br>
           <br>
           Example:<br>
-          /users/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
+          /users/Peter Polanski
+        </td>
+        <td>PUT</td>
+        <td>
+          JSON object holding data about the user data to update, structured like:<br>
+          {<br>
+          	Username: 'Peter Polanski',<br>
+          	Password: 'qwertz',<br>
+          	EMail: 'hallo@byebye.com',<br>
+          	Birthday: "1985-04-20T00:00:00.000Z"<br>
+          }
+        </td>
+        <td>
+          JSON object confirming that data was found and modified, structured like:<br>
+          {<br>
+            n: 1,<br>
+            nModified: 1,<br>
+            ok: 1<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <td>Add Movie to Users FavoriteMovies List</td>
+        <td>
+          /users/[username]/movies/[movieid]<br>
+          <br>
+          Example:<br>
+          /users/Peter Polanski/movies/2
         </td>
         <td>PUT</td>
         <td>None</td>
         <td>
-          A text message indicating the user, username, password, email and date of birth that was updated.
+          JSON object holding data about updated movie list, structured like:<br>
+          <br>
+          {<br>
+            id : '2', <br>
+            Username: ‚Peter Polanski‘,<br>
+            Password: ‚XXXXXXX‘,<br>
+            EMail: ‚polanski@example.com',<br>
+            Birthday: '1985-04-20T00:00:00Z',<br>
+            FavoriteMovies: [2]<br>
+          }
         </td>
       </tr>
       <tr>
         <td>Delete User</td>
         <td>
-          /users/[id]<br>
+          /users/[username]<br>
           <br>
           Example:<br>
-          /users/Top User/hgfgsk*26Q!34/hello@popcorn.com/01.01.1985
+          /users/Peter Polanski
         </td>
         <td>DELETE</td>
         <td>None</td>
