@@ -1,160 +1,25 @@
 ////////////
-// import necessary modules
+// IMPORT NECESSARY MODULES
 ////////////
 
 const express = require('express'),
       morgan = require('morgan'),
       bodyParser = require('body-parser'),
-      uuid = require('uuid');
+      uuid = require('uuid'),
+      mongoose = require('mongoose'),
+      Models = require('./models.js');
 
 // encapsulate express functionality
 const app = express();
 
-///////////////
-// In Memory test arrays
-///////////////
+//assign the models
+const Movies = Models.Movie;
+const Users = Models.User;
 
-// object with top 10 movies
-let topMovies = [ {
-  id : '1',
-  title : 'Snatch',
-  description : 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.',
-  genre : ['comedy', 'crime'],
-  director : {
-    name : 'Guy Ritchie',
-    bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',
-    born : 1968,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904'
-},
-{
-  id : '2',
-  title : 'Lock, Stock & Two Smoking Barrels',
-  description : 'A botched card game in London triggers four friends, thugs, weed-growers, hard gangsters, loan sharks and debt collectors to collide with each other in a series of unexpected events, all for the sake of weed, cash and two antique shotguns.',
-  genre : ['comedy', 'crime'],
-  director : {
-    name : 'Guy Ritchie',
-    bio : 'https://www.imdb.com/name/nm0005363/bio?ref_=nm_ov_bio_sm',
-    born : 1968,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt0120735/mediaviewer/rm1138956032'
-},
-{
-  id : '3',
-  title : 'MAD MAX: Fury Road',
-  description : 'In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max.',
-  genre : ['action', 'adventure', 'sci-fi', 'thriller'],
-  director : {
-    name : 'George Miller',
-    bio : 'https://www.imdb.com/name/nm0004306/bio?ref_=nm_ov_bio_sm',
-    born : 1945,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt1392190/mediaviewer/rm3064749568'
-},
-{
-  id : '4',
-  title : 'STAR WARS: The Last Jedi',
-  description : 'Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares for battle with the First Order.',
-  genre : ['action', 'adventure', 'sci-fi', 'fantasy'],
-  director : {
-    name : 'Rian Johnson',
-    bio : 'https://www.imdb.com/name/nm0426059/bio?ref_=nm_ov_bio_sm',
-    born : 1973,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt2527336/mediaviewer/rm574104832'
-},
-{
-  id : '5',
-  title : 'The Dark Knight',
-  description : 'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham. The Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
-  genre : ['action', 'crime', 'thriller', 'drama'],
-  director : {
-    name : 'Christopher Nolan',
-    bio : 'https://www.imdb.com/name/nm0634240/bio?ref_=nm_ov_bio_sm',
-    born : 1970,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt0468569/mediaviewer/rm4023877632'
-},
-{
-  id : '6',
-  title : 'Captain America: Civil War',
-  description : 'Political involvement in the Avengers affairs causes a rift between Captain America and Iron Man.',
-  genre : ['action', 'adventure', 'sci-fi'],
-  director : {
-    name : 'Anthony Russo',
-    bio : 'https://www.imdb.com/name/nm0751577/bio?ref_=nm_ov_bio_sm',
-    born : 1970,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt3498820/mediaviewer/rm3218348288'
-},
-{
-  id : '7',
-  title : 'The Terminator',
-  description : 'A seemingly indestructible android is sent from 2029 to 1984 to assassinate a waitress, whose unborn son will lead humanity in a war against the machines, while a soldier from that war is sent to protect her at all costs.',
-  genre : ['action', 'sci-fi'],
-  director : {
-    name : 'James Cameron',
-    bio : 'https://www.imdb.com/name/nm0000116/bio?ref_=nm_ov_bio_sm',
-    born : 1954,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt0088247/mediaviewer/rm774208512'
-},
-{
-  id : '8',
-  title : 'Casino Royale',
-  description : 'Armed with a license to kill, Secret Agent James Bond sets out on his first mission as 007, and must defeat a private banker to terrorists in a high stakes game of poker at Casino Royale, Montenegro, but things are not what they seem.',
-  genre : ['action', 'adventure', 'thriller'],
-  director : {
-    name : 'Martin Campbell',
-    bio : 'https://www.imdb.com/name/nm0132709/bio?ref_=nm_ov_bio_sm',
-    born : 1943,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt0381061/mediaviewer/rm3667992064'
-},
-{
-  id : '9',
-  title : 'The Lord of the Rings: The Two Towers',
-  description : 'While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Saurons new ally, Saruman, and his hordes of Isengard.',
-  genre: ['drama', 'adventure', 'fantasy'],
-  director : {
-    name : 'Peter Jackson',
-    bio : 'https://www.imdb.com/name/nm0001392/bio?ref_=nm_ov_bio_sm',
-    born : 1961,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt0167261/mediaviewer/rm2020826368'
-},
-{
-  id : '10',
-  title : 'Black Panther',
-  description : 'TChalla, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his countrys past.',
-  genre : ['action', 'adventure', 'sci-fi'],
-  director : {
-    name : 'Ryan Coogler',
-    bio : 'https://www.imdb.com/name/nm3363032/bio?ref_=nm_ov_bio_sm',
-    born : 1986,
-    died : 'n/a'
-  },
-  imageURL : 'https://www.imdb.com/title/tt1825683/mediaviewer/rm172972800'
-}];
-
-// users list
-let users = [{
-  id : '1',
-  username : 'Peter Polanski',
-  password : 'XXXXXX',
-  email : 'polanski@example.com',
-  dateOfBirth : 1985
-}
-];
+///////////////
+// CONNECT TO MONGODB
+///////////////
+mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true});
 
 /////////////
 // USE-FUNCTIONS SECTION
@@ -180,66 +45,124 @@ app.use(function (err, req, res, next) {
 /////////////
 
 // returns json object of topMovies object to user
-app.get('/movies', function(req, res) {
-  res.json(topMovies);
+app.get('/movies', (req, res) => {
+  Movies.find()
+  .then((movies) => {
+    res.status(201).json(movies)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // returns JSON object of single movie by title
 app.get('/movies/:title', (req, res) => {
-  res.json(topMovies.find((movie) => {
-    return movie.title === req.params.title
-  }));
+  Movies.findOne({Title : req.params.title})
+  .then((movie) => {
+    res.status(201).json(movie)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // returns JSON Object containing every movie matching the genre
 app.get('/movies/genres/:genre', (req, res) => {
-  res.json(topMovies.filter((movie) => {
-    return movie.genre.includes(req.params.genre.toLowerCase())
-  }));
+  Movies.find({"Genre.Name": req.params.genre})
+  .then((movies) => {
+    res.status(201).json(movies)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // returns JSON Object containing every movie matching the dirrector
 app.get('/movies/directors/:director', (req, res) => {
-  res.json(topMovies.filter((movie) => {
-    return movie.director.name === req.params.director
-  }));
+  Movies.find({"Director.Name": req.params.director})
+  .then((movies) => {
+    res.status(201).json(movies)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // returns JSON object with detailed director information by director name to user
-app.get('/directors/:name', function(req, res) {
-  let findDirector = topMovies.find((movie) => {
-    return movie.director.name === req.params.name
+app.get('/directors/:name', (req, res) => {
+  Movies.findOne({"Director.Name" : req.params.name})
+  .then((movie) => {
+    res.status(201).json(movie.Director)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
   });
+});
 
-  if (findDirector) {
-    directorDetails = findDirector.director;
-    res.json(directorDetails);
-  }
+// returns JSON object with detailed genre information by genre name to user
+app.get('/genres/:name', (req, res) => {
+  Movies.findOne({"Genre.Name" : req.params.name})
+  .then((movie) => {
+    res.status(201).json(movie.Genre)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // adds a new movie to list
 app.post('/movies', (req, res) => {
-  let newMovie = req.body;
-
-  if (!newMovie.title) {
-    const message = 'Missing title in request body';
-      res.status(400).send(message);
-  } else {
-    newMovie.id = uuid.v4();
-    topMovies.push(newMovie);
-    res.status(201).send(newMovie);
-  }
+  Movies.findOne({ Title : req.body.Title})
+  .then((movie) => {
+    if (movie) {
+      return res.status(400).send(req.body.Title + ' already exists');
+    } else {
+      Movies.create({
+        Title: req.body.Title,
+        Description: req.body.Description,
+        Genre: req.body.Genre,
+        Director: req.body.Director,
+        ImagePath: req.body.ImagePath,
+        Featured: req.body.Featured,
+        Actors: req.body.Actors,
+        ReleaseYear: req.body.ReleaseYear,
+        IMDBRating: req.body.IMDBRating
+      })
+      .then((movie) => {
+        res.status(201).json(movie)
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
-// deletes a movie from the topMovies list by name
-app.delete('/movies/:id', (req, res) => {
-  let movie = topMovies.find((obj) =>
-    { return obj.id === req.params.id });
-
-  if (movie) {
-    topMovies.filter(function(obj) {return obj.id !== req.params.id});
-    res.status(201).send('Movie ' + req.params.id + ' was deleted.')
-  }
+// deletes a movie from the topMovies list by name    // REWRITE TO ACCESS DB
+app.delete('/movies/:title', (req, res) => {
+  Movies.findOneAndRemove({ Title : req.params.title})
+  .then((movie) => {
+    if (!movie) {
+      res.status(400).send(req.params.title + ' was not found')
+    } else {
+      res.status(200).send(req.params.title + ' was deleted')
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error)
+  });
 });
 
 /////////////
@@ -248,44 +171,81 @@ app.delete('/movies/:id', (req, res) => {
 
 // create new user
 app.post('/users', (req, res) => {
-  let newUser = req.body;
-
-  if (!newUser.username) {
-    const message = 'Missing username in request body';
-      res.status(400).send(message);
-  } else {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).send(newUser);
-  }
+  Users.findOne({ Username : req.body.Username })
+  .then((user) => {
+    if (user) {
+      return res.status(400).send(req.body.Username + ' already exists');
+    } else {
+      Users.create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        EMail: req.body.EMail,
+        Birthday: req.body.Birthday
+      })
+      .then((user) => {
+        res.status(201).json(user)
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 // deletes user from users by ID
-app.delete('/users/:id', (req, res) => {
-  let user = users.find((obj) =>
-    { return obj.id === req.params.id });
-
-  if (user) {
-    users.filter(function(obj) {return obj.id !== req.params.id});
-    res.status(201).send('User ' + req.params.id + ' was deleted.')
-  }
+app.delete('/users/:username', (req, res) => {
+  Users.findOneAndRemove({ Username : req.params.username})
+  .then((user) => {
+    if (!user) {
+      res.status(400).send(req.params.username + ' was not found')
+    } else {
+      res.status(200).send(req.params.username + ' was deleted')
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error)
+  });
 });
 
-// update the user info (username, password, email, date of birth) by ID (is the only unchangable identification)
-app.put('/users/:id/:username/:password/:email/:dateOfBirth', (req, res) => {
-  let user = users.find( (user) => {
-    return user.id === req.params.id
-  });
+// update the user info (username, password, email, date of birth) by username
+app.put('/users/:username', (req, res) => {
+  Users.update({ Username : req.params.username }, { $set: {
+    Username : req.body.Username,
+    Password : req.body.Password,
+    EMail : req.body.EMail,
+    Birthday : req.body.Birthday,
+  }},
+  { new : true },
+  (error, updatedUser) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    } else {
+      res.json(updatedUser)
+    }
+  })
+});
 
-  if (user) {
-    user.username = req.params.username;
-    user.password = req.params.password;
-    user.email = req.params.email;
-    user.dateOfBirth = req.params.dateOfBirth;
-    res.status(201).send('User information(s) successfully changed');
-  } else {
-    res.status(404).send("User with the ID " + req.params.id  + " was not found.");
-  }
+// add a movie to users favoriteMovies list
+app.put('/users/:username/movies/:movieid', (req, res) => {
+  Users.findOneAndUpdate({ Username : req.params.username}, { $push : {
+    FavoriteMovies : req.params.movieid
+  }},
+  { new : true},
+  (error, updatedUser) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    } else {
+      res.json(updatedUser)
+    }
+  })
 });
 
 // default textual response when request hits the root folder
