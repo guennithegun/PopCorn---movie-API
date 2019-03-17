@@ -7,7 +7,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       uuid = require('uuid'),
       mongoose = require('mongoose'),
-      Models = require('./models.js')
+      Models = require('./models.js'),
       passport = require('passport');
 
 require('./passport');
@@ -204,7 +204,7 @@ app.post('/users', (req, res) => {
 });
 
 // deletes user from users by ID
-app.delete('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:username', (req, res) => {
   Users.findOneAndRemove({ Username : req.params.username})
   .then((user) => {
     if (!user) {
