@@ -7,14 +7,20 @@ var jwt = require('jsonwebtoken');
 const passport = require('passport');
 require('./passport');
 
+////////////////
+// FUNCTION TO GENRATE JWT TOKEN
+////////////////
 function generateJWTToken(user) {
   return jwt.sign(user, jwtSecret, {
-    subject: user.username,
+    subject: user.Username,
     expiresIn: '7d',
     algorithm: 'HS256'
   });
 }
 
+////////////////
+// MODULE EXPORT PASSPORT MIDDLEWARE
+////////////////
 module.exports = (app) => {
   app.post('/login', (req, res) => {
     passport.authenticate('local', { session : false}, (error, user, info) => {
