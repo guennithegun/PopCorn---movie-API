@@ -15,12 +15,11 @@ var ExtractJWT = passportJWT.ExtractJwt;
 // DEFINE PASSPORT STRATEGIES
 ////////////////
 
-// LocalStrategy to define basic HTTP authentication for login requests
+//LocalStrategy to define basic HTTP authentication for login requests
 passport.use(new LocalStrategy({
   usernameField: 'Username',
   passwordField: 'Password'
 }, (username, password, callback) => {
-  ;                                                 //WHAT IS WRONG HERE??????
   console.log(username + '  ' + password);
   Users.findOne({Username: username, Password: password}, (error, user) => {
     if (error) {
