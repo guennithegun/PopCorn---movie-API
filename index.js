@@ -132,6 +132,16 @@ app.get('/genres/:name', passport.authenticate('jwt', { session: false }), (req,
 
 // adds a new movie to list
 app.post('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+  // server-side Input validation
+  req.checkBody('Title', 'Title is required').notEmpty();
+  req.checkBody('Description', 'Description is required').notEmpty();
+
+  // check the validation object for errors
+  var errors = req.validationErrors();
+  if (errors) {
+    return res.status(422).json({ errors: errors });
+  }
+
   Movies.findOne({ Title : req.body.Title})
   .then((movie) => {
     if (movie) {
@@ -259,10 +269,13 @@ app.put('/users/:username', passport.authenticate('jwt', { session: false }), (r
     return res.status(422).json({ errors: errors });
   }
 
+  // hash password of new User
+  var hashedPassword = Users.hashPassword(req.body.Password);
+
   // update User Data
   Users.update({ Username : req.params.username }, { $set: {
     Username : req.body.Username,
-    Password : req.body.Password,
+    Password : hashedPassword,
     EMail : req.body.EMail,
     Birthday : req.body.Birthday,
   }},
