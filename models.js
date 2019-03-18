@@ -47,7 +47,7 @@ userSchema.statics.hashPassword = function(password) {
 
 userSchema.methods.validatePassword = function(password) {
   return bcrypt.compare(password, this.password);
-}
+};
 
 ////////////////
 // CREATING MODELS
