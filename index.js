@@ -8,7 +8,8 @@ const express = require('express'),
       uuid = require('uuid'),
       mongoose = require('mongoose'),
       Models = require('./models.js'),
-      passport = require('passport');
+      passport = require('passport'),
+      const cors = require('cors');
 
 require('./passport');
 
@@ -39,6 +40,9 @@ app.use(express.static('public'));
 
 // implementing body-parser for POST requests
 app.use(bodyParser.json());
+
+// use CORS
+app.use(cors());
 
 // error handling if something went wrong
 app.use(function (err, req, res, next) {
