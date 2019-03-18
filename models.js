@@ -2,7 +2,8 @@
 // IMPORT RELEVANT MODULES
 ////////////////
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+      bcrypt = require('bcrypt');
 
 ////////////////
 // CREATING SCHEMAS
@@ -39,6 +40,14 @@ var userSchema = mongoose.Schema({
   FavoriteMovies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}]
 });
 
+// hash and validate User password
+userSchema.statics.hashPassword = function(password) {
+  return bcrypt.hashSync(password, 10);
+};
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
+}
 
 ////////////////
 // CREATING MODELS
