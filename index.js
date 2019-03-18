@@ -9,7 +9,8 @@ const express = require('express'),
       mongoose = require('mongoose'),
       Models = require('./models.js'),
       passport = require('passport'),
-      const cors = require('cors');
+      cors = require('cors'),
+      validator = require('express-validator');
 
 require('./passport');
 
@@ -43,6 +44,9 @@ app.use(bodyParser.json());
 
 // use CORS
 app.use(cors());
+
+// use express-validator
+app.use(validator());
 
 // error handling if something went wrong
 app.use(function (err, req, res, next) {
@@ -181,8 +185,23 @@ app.delete('/movies/:title', passport.authenticate('jwt', { session: false }), (
 
 // create new user
 app.post('/users', (req, res) => {
+  // server-side Input validation
+  req.checkBody('Username', 'Username is required').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('EMail', 'EMail is required').notEmpty();
+  req.checkBody('EMail', 'EMail does not appear to be valid').isEmail();
+
+  // check the validation object for errors
+  var errors = req.validationErrors();
+  if (errors) {
+    return res.status(422).json({ errors: errors });
+  }
+
+  // hash password of new User
   var hashedPassword = Users.hashPassword(req.body.Password);
 
+  // create new User
   Users.findOne({ Username : req.body.Username })
   .then((user) => {
     if (user) {
@@ -227,6 +246,20 @@ app.delete('/users/:username', (req, res) => {
 
 // update the user info (username, password, email, date of birth) by username
 app.put('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
+  // server-side Input validation
+  req.checkBody('Username', 'Username is required').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('EMail', 'EMail is required').notEmpty();
+  req.checkBody('EMail', 'EMail does not appear to be valid').isEmail();
+
+  // check the validation object for errors
+  var errors = req.validationErrors();
+  if (errors) {
+    return res.status(422).json({ errors: errors });
+  }
+
+  // update User Data
   Users.update({ Username : req.params.username }, { $set: {
     Username : req.body.Username,
     Password : req.body.Password,
