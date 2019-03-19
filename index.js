@@ -30,7 +30,7 @@ const Users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true}); ----- LOCAL (can be used for testing purposes)
 
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/test?retryWrites=true', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcornDB.mongodb.net/popcornDB', {useNewUrlParser: true});
 
 /////////////
 // USE-FUNCTIONS SECTION
