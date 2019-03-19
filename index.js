@@ -311,4 +311,11 @@ app.get('/', function(req, res) {
   res.send('Welcome to PopCorn. The best movie App ever :-P');
 });
 
-app.listen(8080);
+/////////////
+// APP Listener
+/////////////
+var port = process.env.PORT || 3000;
+
+app.listen(port, '0.0.0.0', function() {
+  console.log('Listening on Port 3000');
+});
