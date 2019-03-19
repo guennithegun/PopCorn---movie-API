@@ -10,7 +10,8 @@ const express = require('express'),
       Models = require('./models.js'),
       passport = require('passport'),
       cors = require('cors'),
-      validator = require('express-validator');
+      validator = require('express-validator'),
+      MongoClient = require('mongodb').MongoClient;
 
 require('./passport');
 
@@ -30,7 +31,14 @@ const Users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true}); ----- LOCAL (can be used for testing purposes)
 
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcornDB.mongodb.net/popcornDB', {useNewUrlParser: true});
+//mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcornDB.mongodb.net/popcornDB', {useNewUrlParser: true});
+const uri = "mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
 
 /////////////
 // USE-FUNCTIONS SECTION
