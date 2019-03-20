@@ -29,22 +29,6 @@ const Users = Models.User;
 ///////////////
 
 //mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true}); ----- LOCAL (can be used for testing purposes)
-async function runTransactionWithRetry(txnFunc, client, session) {
-  try {
-    await txnFunc(client, session);
-  } catch (error) {
-    console.log('Transaction aborted. Caught exception during transaction.');
-
-    // If transient error, retry the whole transaction
-    if (error.errorLabels && error.errorLabels.indexOf('TransientTransactionError') >= 0) {
-      console.log('TransientTransactionError, retrying transaction ...');
-      await runTransactionWithRetry(txnFunc, client, session);
-    } else {
-      throw error;
-    }
-  }
-}
-
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -60,7 +44,7 @@ const options = {
   family: 4 // Use IPv4, skip trying IPv6
 };
 
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', options)
+mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-shard-00-00-q3gty.mongodb.net,popcorndb-shard-00-01-q3gty.mongodb.net,popcorndb-shard-00-02-q3gty.mongodb.net/popcornDB?retryWrites=true', options)
   .then(() => { },
   error => { console.error(error); }
 );
