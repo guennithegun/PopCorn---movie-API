@@ -29,25 +29,8 @@ const Users = Models.User;
 ///////////////
 
 //mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true}); ----- LOCAL (can be used for testing purposes)
-const options = {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  autoIndex: false, // Don't build indexes
-  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-  reconnectInterval: 500, // Reconnect every 500ms
-  poolSize: 10, // Maintain up to 10 socket connections
-  // If not connected, return errors immediately rather than waiting for reconnect
-  bufferMaxEntries: 0,
-  connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
-  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-  family: 4 // Use IPv4, skip trying IPv6
-};
 
-mongoose.connect('mongodb://popcornDBAdmin:guenni@popcorndb-shard-00-00-q3gty.mongodb.net:27017,popcorndb-shard-00-01-q3gty.mongodb.net:27017,popcorndb-shard-00-02-q3gty.mongodb.net:27017/popcornDB?retryWrites=true', options, function(error){console.log(error)});
-//   .then(() => { },
-//   error => { console.error(error); }
-// );
+mongoose.connect('mongodb+srv://popcornDBAdmin:<password>@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', function(error){console.log(error)});
 
 /////////////
 // USE-FUNCTIONS SECTION
