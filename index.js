@@ -44,10 +44,10 @@ const options = {
   family: 4 // Use IPv4, skip trying IPv6
 };
 
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-shard-00-00-q3gty.mongodb.net,popcorndb-shard-00-01-q3gty.mongodb.net,popcorndb-shard-00-02-q3gty.mongodb.net/popcornDB?retryWrites=true', options)
-  .then(() => { },
-  error => { console.error(error); }
-);
+mongoose.connect('mongodb://popcornDBAdmin:guenni@popcorndb-shard-00-00-q3gty.mongodb.net:27017,popcorndb-shard-00-01-q3gty.mongodb.net:27017,popcorndb-shard-00-02-q3gty.mongodb.net:27017/popcornDB?retryWrites=true', options, function(error){console.log(error)});
+//   .then(() => { },
+//   error => { console.error(error); }
+// );
 
 /////////////
 // USE-FUNCTIONS SECTION
