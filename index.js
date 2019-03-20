@@ -30,7 +30,14 @@ const Users = Models.User;
 
 //mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true}); ----- LOCAL (can be used for testing purposes)
 
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', {useNewUrlParser: true}, function() { /* dummy function */ })
+    .then(() => {
+        return server.start();
+    })
+    .catch(err => { // mongoose connection error will be handled here
+        console.error('App starting error:', err.stack);
+        process.exit(1);
+    });
 
 /////////////
 // USE-FUNCTIONS SECTION
