@@ -43,7 +43,10 @@ const options = {
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
   family: 4 // Use IPv4, skip trying IPv6
 };
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', options);
+mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', options)
+  .then(() => { },
+  error => { console.error(error); }
+);
 
 /////////////
 // USE-FUNCTIONS SECTION
