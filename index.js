@@ -242,7 +242,7 @@ app.post('/users', (req, res) => {
 });
 
 // deletes user from users by ID
-app.delete('/users/:username', (req, res) => {
+app.delete('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndRemove({ Username : req.params.username})
   .then((user) => {
     if (!user) {
