@@ -2,15 +2,15 @@
 // IMPORT RELEVANT MODULES
 ////////////////
 
-const mongoose = require('mongoose'),
-      bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 ////////////////
 // CREATING SCHEMAS
 ////////////////
 
 //movies
-var movieSchema = mongoose.Schema({
+let movieSchema = mongoose.Schema({
   Title: {type: String, required: true},
   Description: {type: String, required: true},
   Genre: {
@@ -32,7 +32,7 @@ var movieSchema = mongoose.Schema({
 });
 
 //users
-var userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
   Username: {type: String, required: true},
   Password: {type: String, required: true},
   EMail: {type: String, required: true},
@@ -52,8 +52,8 @@ userSchema.methods.validatePassword = function(password) {
 ////////////////
 // CREATING MODELS
 ////////////////
-var Movie = mongoose.model('Movie', movieSchema);
-var User = mongoose.model('User', userSchema);
+let Movie = mongoose.model('Movie', movieSchema);
+let User = mongoose.model('User', userSchema);
 
 ////////////////
 // EXPORT

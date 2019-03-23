@@ -2,8 +2,8 @@
 // IMPORT RELEVANT MODULES / FILES
 ////////////////
 
-var jwtSecret = 'your_jwt_secret';
-var jwt = require('jsonwebtoken');
+let jwtSecret = 'your_jwt_secret';
+let jwt = require('jsonwebtoken');
 const passport = require('passport');
 require('./passport');
 
