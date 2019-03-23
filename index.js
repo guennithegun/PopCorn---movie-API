@@ -2,23 +2,20 @@
 // IMPORT NECESSARY MODULES
 ////////////
 
-const express = require('express'),
-      morgan = require('morgan'),
-      bodyParser = require('body-parser'),
-      uuid = require('uuid'),
-      mongoose = require('mongoose'),
-      Models = require('./models.js'),
-      passport = require('passport'),
-      cors = require('cors'),
-      validator = require('express-validator');
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const uuid = require('uuid');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const cors = require('cors');
+const validator = require('express-validator');
+const Models = require('./models.js');
 
 require('./passport');
 
 // encapsulate express functionality
 const app = express();
-
-// import auth.js file
-var auth = require('./auth')(app);
 
 //assign the models
 const Movies = Models.Movie;
@@ -28,9 +25,7 @@ const Users = Models.User;
 // CONNECT TO MONGODB
 ///////////////
 
-//mongoose.connect('mongodb://localhost:27017/popcornDB', {useNewUrlParser: true}); ----- LOCAL (can be used for testing purposes)
-
-mongoose.connect('mongodb+srv://popcornDBAdmin:guenni@popcorndb-q3gty.mongodb.net/popcornDB?retryWrites=true', {useNewUrlParser: true}, function(error){console.log(error)});
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
 
 /////////////
 // USE-FUNCTIONS SECTION
@@ -44,6 +39,9 @@ app.use(express.static('public'));
 
 // implementing body-parser for POST requests
 app.use(bodyParser.json());
+
+// import auth.js file
+let auth = require('./auth')(app);
 
 // use CORS
 app.use(cors());
@@ -206,13 +204,13 @@ app.post('/users', (req, res) => {
   req.checkBody('EMail', 'EMail does not appear to be valid').isEmail();
 
   // check the validation object for errors
-  var errors = req.validationErrors();
+  let errors = req.validationErrors();
   if (errors) {
     return res.status(422).json({ errors: errors });
   }
 
   // hash password of new User
-  var hashedPassword = Users.hashPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password);
 
   // create new User
   Users.findOne({ Username : req.body.Username })
@@ -267,13 +265,13 @@ app.put('/users/:username', passport.authenticate('jwt', { session: false }), (r
   req.checkBody('EMail', 'EMail does not appear to be valid').isEmail();
 
   // check the validation object for errors
-  var errors = req.validationErrors();
+  let errors = req.validationErrors();
   if (errors) {
     return res.status(422).json({ errors: errors });
   }
 
   // hash password of new User
-  var hashedPassword = Users.hashPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password);
 
   // update User Data
   Users.update({ Username : req.params.username }, { $set: {
@@ -317,8 +315,8 @@ app.get('/', function(req, res) {
 /////////////
 // APP Listener
 /////////////
-var port = process.env.PORT || 3000;
+let port = process.env.PORT || 3000;
 
 app.listen(port, '0.0.0.0', function() {
-  console.log('Listening on Port 3000');
+  console.log(`Listening on ${port}`);
 });
