@@ -44,7 +44,18 @@ app.use(bodyParser.json());
 let auth = require('./auth')(app);
 
 // use CORS
-app.use(cors(*));
+var allowedOrigins = ['http://localhost:1234'];
+
+app.use(cors({
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      var message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 // use express-validator
 app.use(validator());
