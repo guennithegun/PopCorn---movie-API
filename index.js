@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 let auth = require('./auth')(app);
 
 // use CORS
-app.use(cors());
+app.use(cors();
 
 // use express-validator
 app.use(validator());
