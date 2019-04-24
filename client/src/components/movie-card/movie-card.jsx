@@ -2,6 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React from 'react';
+import PropTypes from 'prop-types';
 
 ////////////
 // DECLARE AND EXPORT COMPONENTS
@@ -16,9 +17,9 @@ export class MovieCard extends React.Component {
   }
 }
 
-// MovieCard.propTypes = {
-//   movie: PropTypes.shape({
-//     title: PropTypes.string
-//   }).isRequired,
-//   onClick: PropTypes.func.isRequired
-// };
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};

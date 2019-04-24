@@ -12,8 +12,9 @@ export function LoginView(props) {
   const [username, setUsername ] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    axios.post('https://popcorn-movieapp.herokuapp.com/login')
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('https://popcorn-movieapp.herokuapp.com/login', {})
     .then(response => {
       console.log(response);
     })
