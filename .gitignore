@@ -40,6 +40,7 @@ Thumbs.db
 ###########
 node_modules/
 test/
+dist/
 
 # Files #
 .env
