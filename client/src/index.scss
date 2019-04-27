@@ -3,3 +3,11 @@ $color: steelblue;
 .popcorn {
   color: $color;
 }
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-image: url("img/mainbackground.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
