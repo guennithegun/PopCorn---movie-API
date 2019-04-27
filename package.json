@@ -36,7 +36,7 @@
     "passport-local": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.6",
+    "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "util": "^0.11.1",
     "uuid": "^3.3.2"
