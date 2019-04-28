@@ -22,21 +22,10 @@ export function LoginView(props) {
   };
 
   return (
-    // <form>
-    //   <label>
-    //     Username:
-    //     <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-    //   </label>
-    //   <label>
-    //     Password:
-    //     <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
-    //   </label>
-    //   <button type="button" onClick={handleSubmit}>Submit</button>
-    // </form>
     <Form>
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="email" placeholder="Enter Username" />
+        <Form.Label >Username</Form.Label>
+        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
         <Form.Text className="text-muted">
         Type your username here.
         </Form.Text>
@@ -44,12 +33,14 @@ export function LoginView(props) {
 
       <Form.Group controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" />
+        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-      Submit
+      <Button variant="primary" type="button" onClick={handleSubmit}>
+      LOGIN
       </Button>
+      <p>Not registered???</p>
+      <p>Start Enjoying <span>HERE</span></p>
     </Form>
   );
 }
