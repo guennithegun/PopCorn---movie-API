@@ -27,23 +27,22 @@ form {
   overflow: scroll;
 }
 
-@keyframes formSlideIn {
-  from {
-    bottom: -300px;
-  }
-
-  to {
-    bottom: 0px;
-  }
+.form-group {
+  width: 90%;
+  margin: 20px 0;
 }
 
-p {
-  font-size: 12px;
+.text-muted {
+  color: $tertiary-color!important;
 }
 
 span {
   color: $tertiary-color;
   cursor: pointer;
+}
+
+p {
+  font-size: 12px;
 }
 
 .btn {
@@ -58,22 +57,19 @@ span {
   color: white;
 }
 
-.btn-primary:active {
-  background-color: white;
-}
-
 .btn-primary:hover {
   background-color: $tertiary-color;
   border-color: $tertiary-color;
 }
 
-.form-group {
-  width: 90%;
-  margin: 20px 0;
-}
+@keyframes formSlideIn {
+  from {
+    bottom: -300px;
+  }
 
-.text-muted {
-  color: $tertiary-color!important;
+  to {
+    bottom: 0px;
+  }
 }
 
 @media only screen and (min-width: 500px) {

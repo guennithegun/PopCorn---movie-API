@@ -40,7 +40,7 @@ export function LoginView(props) {
       LOGIN
       </Button>
       <p>Not registered???</p>
-      <p>Start Enjoying <span>HERE</span></p>
+      <p>Start Enjoying <span onClick={() => props.onClick()}>HERE</span></p>
     </Form>
   );
 }
