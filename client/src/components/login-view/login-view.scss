@@ -6,22 +6,35 @@ $tertiary-color: #1ea896;
 body, html {
   width: 100%;
   height: 100%;
-  background-image: url("../../img/mainbackground.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url("../../img/mainbackground.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 form {
   width: 90%;
   padding: 10px;
   margin: 70px auto;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: $primary-color-transparent;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: 'Ubuntu', sans-serif;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  position: relative;
+  animation: formSlideIn .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: scroll;
+}
+
+@keyframes formSlideIn {
+  from {
+    bottom: -300px;
+  }
+
+  to {
+    bottom: 0px;
+  }
 }
 
 p {
