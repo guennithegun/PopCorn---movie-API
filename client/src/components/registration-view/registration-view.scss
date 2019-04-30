@@ -1,0 +1,63 @@
+$primary-color: #a71d31;
+$primary-color-transparent: rgba(167, 29, 49, 0.7);
+$secondary-color: #fde74c;
+$tertiary-color: #1ea896;
+
+form {
+  width: 90%;
+  padding: 10px;
+  margin: 70px auto;
+  border-radius: 5px;
+  background-color: $primary-color-transparent;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Ubuntu', sans-serif;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  position: relative;
+  animation: formSlideIn .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: scroll;
+}
+
+.form-group {
+  width: 90%;
+  margin: 20px 0;
+}
+
+.text-muted {
+  color: $tertiary-color!important;
+}
+
+.btn {
+  width: 150px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-color: $tertiary-color;
+  border-width: 2px;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: $tertiary-color;
+  border-color: $tertiary-color;
+}
+
+@keyframes formSlideIn {
+  from {
+    bottom: -300px;
+  }
+
+  to {
+    bottom: 0px;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  form {
+    width: 450px;
+  }
+}
