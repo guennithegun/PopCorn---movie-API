@@ -1,0 +1,49 @@
+$primary-color: #a71d31;
+$primary-color-transparent: rgba(167, 29, 49, 0.7);
+$secondary-color: #fde74c;
+$tertiary-color: #1ea896;
+
+.card {
+  margin-top: 30px;
+  background-color: $primary-color-transparent;
+  animation: growCard 0.3s ease-in;
+}
+
+@keyframes growCard {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.container {
+  overflow:scroll;
+}
+
+.card-title {
+  color: $tertiary-color;
+}
+
+.btn {
+  width: 150px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-color: $tertiary-color;
+  border-width: 2px;
+  color: white;
+}
+
+.btn-primary:active {
+  background-color: white;
+}
+
+.btn-primary:hover {
+  background-color: $tertiary-color;
+  border-color: $tertiary-color;
+}
