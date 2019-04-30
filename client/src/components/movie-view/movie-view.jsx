@@ -21,7 +21,7 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="movie-view flipInY">
+      <div className="movie-view">
         <div className="movie-title">
           <div className="label">Title</div>
           <div className="value">{movie.Title}</div>
