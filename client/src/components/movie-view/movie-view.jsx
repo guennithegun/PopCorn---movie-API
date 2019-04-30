@@ -2,6 +2,8 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React from 'react';
+import './movie-view.scss';
+import Button from 'react-bootstrap/Button';
 
 ////////////
 // DECLARE AND EXPORT COMPONENTS
@@ -19,7 +21,7 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
+      <div className="movie-view flipInY">
         <div className="movie-title">
           <div className="label">Title</div>
           <div className="value">{movie.Title}</div>
@@ -37,7 +39,9 @@ export class MovieView extends React.Component {
           <div className="label">Director</div>
           <div className="value">{movie.Director.Name}</div>
         </div>
-        <button onClick={() => onClick()}>BACK</button>
+        <Button variant="primary" type="button" onClick={() => onClick()} >
+        BACK
+        </Button>
       </div>
     );
   }
