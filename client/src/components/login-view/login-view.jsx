@@ -2,7 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React, { useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './login-view.scss';
@@ -44,3 +44,11 @@ export function LoginView(props) {
     </Form>
   );
 }
+
+////////////
+// DEFINING PROPTYPES
+////////////
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
+};

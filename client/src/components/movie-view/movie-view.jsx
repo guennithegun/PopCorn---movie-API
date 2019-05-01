@@ -2,8 +2,9 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React from 'react';
-import './movie-view.scss';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import './movie-view.scss';
 
 ////////////
 // DECLARE AND EXPORT COMPONENTS
@@ -46,3 +47,29 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+////////////
+// DEFINING PROPTYPES
+////////////
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string
+  }).isRequired,
+  movie: PropTypes.shape({
+    Description: PropTypes.string
+  }).isRequired,
+  movie: PropTypes.shape({
+    ImagePath: PropTypes.string
+  }).isRequired,
+  movie: PropTypes.shape({
+    Genre: PropTypes.shape({
+      Name: PropTypes.string
+    })
+  }).isRequired,
+  movie: PropTypes.shape({
+    Director: PropTypes.shape({
+      Name: PropTypes.string
+    })
+  }).isRequired,
+  onClick: PropTypes.func.isRequired
+};
