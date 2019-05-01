@@ -2,7 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React, { useState } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './registration-view.scss';
@@ -52,6 +52,15 @@ export function RegistrationView(props) {
       <Button variant="primary" type="button" onClick={handleSubmit}>
       SIGN IN
       </Button>
+      <p>Already Member? <span onClick={() => props.onClick()}>LOG IN</span></p>
     </Form>
   );
 }
+
+////////////
+// DEFINING PROPTYPES
+////////////
+RegistrationView.propTypes = {
+  onSignedIn: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
+};
