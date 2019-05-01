@@ -69,12 +69,18 @@ export class MainView extends React.Component {
     })
   }
 
+  alreadyMember() {
+    this.setState({
+      register: false
+    })
+  }
+
   render() {
     const {movies, selectedMovie, user, register} = this.state;
 
     if (!user && register === false) return <LoginView onClick={() => this.register()} onLoggedIn={user => this.onLoggedIn(user)} />
 
-    if (register) return <RegistrationView onSignedIn={user => this.onSignedIn(user)} />
+    if (register) return <RegistrationView onClick={() => this.alreadyMember()} onSignedIn={user => this.onSignedIn(user)} />
 
     if (!movies) return <div className="main-view"/>;
     return (
