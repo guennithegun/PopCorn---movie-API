@@ -40,11 +40,11 @@ app.use(express.static('public'));
 // implementing body-parser for POST requests
 app.use(bodyParser.json());
 
-// import auth.js file
-let auth = require('./auth')(app);
-
 // use CORS
 app.use(cors());
+
+// import auth.js file
+let auth = require('./auth')(app);
 
 // use express-validator
 app.use(validator());
