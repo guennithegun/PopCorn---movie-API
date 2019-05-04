@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build": "parcel client/src/index.html"
+    "build": "parcel client_Backup/src/index.html"
   },
   "repository": {
     "type": "git",
