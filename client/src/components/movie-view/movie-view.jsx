@@ -31,7 +31,7 @@ export class MovieView extends React.Component {
           <div className="label">Description</div>
           <div className="value">{movie.Description}</div>
         </div>
-        <img className="movie-poster" src={movie.ImagePath}/>
+        <img className="movie-poster" src={movie.ImagePath} alt="movie cover" />
         <div className="movie-genre">
           <div className="label">Genre</div>
           <div className="value">{movie.Genre.Name}</div>
@@ -53,20 +53,12 @@ export class MovieView extends React.Component {
 ////////////
 MovieView.propTypes = {
   movie: PropTypes.shape({
-    Title: PropTypes.string
-  }).isRequired,
-  movie: PropTypes.shape({
-    Description: PropTypes.string
-  }).isRequired,
-  movie: PropTypes.shape({
-    ImagePath: PropTypes.string
-  }).isRequired,
-  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes.string,
+    ImagePath: PropTypes.string,
     Genre: PropTypes.shape({
       Name: PropTypes.string
-    })
-  }).isRequired,
-  movie: PropTypes.shape({
+    }),
     Director: PropTypes.shape({
       Name: PropTypes.string
     })

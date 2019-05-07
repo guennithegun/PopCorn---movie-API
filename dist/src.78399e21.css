@@ -1,5 +1,223 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  background: url("/mainbackground.b773b4a5.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+form {
+  width: 90%;
+  padding: 10px;
+  margin: 70px auto;
+  border-radius: 5px;
+  background-color: rgba(167, 29, 49, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Ubuntu", sans-serif;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  position: relative;
+  animation: formSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: scroll;
+}
+
+.form-group {
+  width: 90%;
+  margin: 20px 0;
+}
+
+.text-muted {
+  color: #1ea896 !important;
+}
+
+span {
+  color: #1ea896;
+  cursor: pointer;
+}
+
+p {
+  font-size: 12px;
+}
+
+.btn {
+  width: 150px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-color: #1ea896;
+  border-width: 2px;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1ea896;
+  border-color: #1ea896;
+}
+
+@keyframes formSlideIn {
+  from {
+    bottom: -300px;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+@media only screen and (min-width: 500px) {
+  form {
+    width: 450px;
+  }
+}
+form {
+  width: 90%;
+  padding: 10px;
+  margin: 70px auto;
+  border-radius: 5px;
+  background-color: rgba(167, 29, 49, 0.7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Ubuntu", sans-serif;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  position: relative;
+  animation: formSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: scroll;
+}
+
+.form-group {
+  width: 90%;
+  margin: 20px 0;
+}
+
+.text-muted {
+  color: #1ea896 !important;
+}
+
+.btn {
+  width: 150px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-color: #1ea896;
+  border-width: 2px;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1ea896;
+  border-color: #1ea896;
+}
+
+@keyframes formSlideIn {
+  from {
+    bottom: -300px;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+@media only screen and (min-width: 500px) {
+  form {
+    width: 450px;
+  }
+}
+.card {
+  margin-top: 30px;
+  background-color: rgba(167, 29, 49, 0.7);
+  animation: growCard 0.3s ease-in;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border: none;
+}
+
+@keyframes growCard {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.card-title {
+  color: #1ea896;
+}
+
+.btn {
+  width: 150px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-color: #1ea896;
+  border-width: 2px;
+  color: white;
+}
+
+.btn-primary:active {
+  background-color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1ea896;
+  border-color: #1ea896;
+}
+.movie-view {
+  font-family: "Ubuntu", sans-serif;
+  background-color: rgba(167, 29, 49, 0.7);
+  margin: 50px 10px;
+  padding: 20px;
+  color: #fde74c;
+  border-radius: 5px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.btn {
+  width: 150px;
+  margin: 20px 0;
+}
+
+.btn-primary {
+  background-color: transparent;
+  border-color: #1ea896;
+  border-width: 2px;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1ea896;
+  border-color: #1ea896;
+}
+.container {
+  margin-bottom: 50px;
+}
 .popcorn {
   color: steelblue;
+}
+
+h1 {
+  font-family: "Orbitron", sans-serif;
+  color: #fde74c;
+}
+
+p {
+  font-family: "Orbitron", sans-serif;
+  color: #fde74c;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1ea896;
+}
+
+header img {
+  width: 40px;
 }
 
 /*# sourceMappingURL=/src.78399e21.css.map */
