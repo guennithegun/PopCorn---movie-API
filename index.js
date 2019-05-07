@@ -315,7 +315,7 @@ app.get('/', function(req, res) {
 /////////////
 // APP Listener
 /////////////
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 8080;
 
 app.listen(port, '0.0.0.0', function() {
   console.log(`Listening on ${port}`);
