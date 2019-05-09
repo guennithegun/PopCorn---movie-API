@@ -2,6 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React, { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -19,8 +20,20 @@ export function RegistrationView(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onSignedIn(username);
+    axios.post('https://popcorn-movieapp.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      EMail: email,
+      Birthday: birthday
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/');
+    })
+    .catch(event => {
+      console.log('error registering the user')
+    });
   };
 
   return (

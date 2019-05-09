@@ -2,6 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React, { useState } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -17,8 +18,17 @@ export function LoginView(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
+    axios.post('https://popcorn-movieapp.herokuapp.com/login', {
+      Username: username,
+      Password: password
+    })
+    .then(response => {
+      const data = response.data;
+      props.onLoggedIn(data);
+    })
+    .catch(event => {
+      alert('no such user: ' + username);
+    });
   };
 
   return (
