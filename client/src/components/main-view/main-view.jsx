@@ -43,6 +43,7 @@ export class MainView extends React.Component {
     this.handleNewHash();
   }
 
+  //parsing hash
   handleNewHash = () => {
     const movieId = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
 
@@ -51,6 +52,7 @@ export class MainView extends React.Component {
     });
   }
 
+  //get list of all movies
   getMovies(token) {
     axios.get('https://popcorn-movieapp.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}`}
@@ -65,20 +67,23 @@ export class MainView extends React.Component {
     });
   }
 
+  //show single movie details
   onMovieClick(movie) {
-    //new
+    //hash
     window.location.hash = '#' + movie._id;
     this.setState({
       selectedMovieId: movie._id
     });
   }
 
+  //get back to main-view
   getBackClick() {
     this.setState({
       selectedMovieId: null
     });
   }
 
+  //logging in
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -90,6 +95,7 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  //registrate new user
   onSignedIn(user) {
     this.setState({
       user: user,
@@ -97,12 +103,14 @@ export class MainView extends React.Component {
     });
   }
 
+  //go to register-view
   register() {
     this.setState({
       register: true
     })
   }
 
+  //get back from register-view to login-view
   alreadyMember() {
     this.setState({
       register: false
@@ -124,13 +132,15 @@ export class MainView extends React.Component {
   render() {
     const {movies, selectedMovieId, user, register} = this.state;
 
+    //shows login-view as standard
     if (!user && register === false) return <LoginView onClick={() => this.register()} onLoggedIn={user => this.onLoggedIn(user)} />
 
+    //if user clicks HERE on login-view this displays the registration-view
     if (register) return <RegistrationView onClick={() => this.alreadyMember()} onSignedIn={user => this.onSignedIn(user)} />
 
     if (!movies) return <div className="main-view"/>;
 
-    //new
+    //for hash routing
     const selectedMovie = selectedMovieId ? movies.find(movie => movie._id === selectedMovieId) : null;
 
     return (
