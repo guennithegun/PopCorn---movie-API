@@ -94,6 +94,18 @@ export class MainView extends React.Component {
     })
   }
 
+  //logut function for LogOut button
+  logOut() {
+    //clears storage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    //resets user state to render again
+    this.setState({
+      user: null
+    })
+  }
+
   render() {
     const {movies, selectedMovie, user, register} = this.state;
 
@@ -104,6 +116,9 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view"/>;
     return (
       <div className="main-view">
+      <div className="logout">
+        <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
+      </div>
       <Container>
       <Row>
       {selectedMovie

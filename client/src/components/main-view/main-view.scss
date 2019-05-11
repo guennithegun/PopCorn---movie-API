@@ -1,3 +1,31 @@
+$primary-color: #a71d31;
+$primary-color-transparent: rgba(167, 29, 49, 0.7);
+$secondary-color: #fde74c;
+$tertiary-color: #1ea896;
+
 .container {
   margin-bottom: 50px;
+}
+
+.logout {
+  margin-top: 10px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout button {
+  background-color: $primary-color-transparent;
+  border: none;
+  border-radius: 3px;
+  font-family: 'Ubuntu', sans-serif;
+  color: $secondary-color;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.logout img {
+  width: 16px;
+  margin-left: 5px;
+  padding-bottom: 3px;
 }
