@@ -29,15 +29,13 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://popcorn-movieapp.herokuapp.com/movies')
-    .then(response => {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
       this.setState({
-        movies: response.data
+        user: localStorage.getItem('user')
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      this.getMovies(accessToken);
+    }
   }
 
   getMovies(token) {
@@ -67,7 +65,7 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData.user._id);
+    console.log(authData);
     this.setState({
       user: authData.user.Username
     });
