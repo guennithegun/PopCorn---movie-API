@@ -22,13 +22,14 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: null,
-      selectedMovie: null,
+      selectedMovieId: null,
       user: null,
       register: false
     };
   }
 
   componentDidMount() {
+    //authentication
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -36,6 +37,18 @@ export class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
+
+    //hash routing
+    window.addEventListener('hashchange', this.handleNewHash, false);
+    this.handleNewHash();
+  }
+
+  handleNewHash = () => {
+    const movieId = window.location.hash.replace(/^#\/?|\/$/g, '').split('/');
+
+    this.setState({
+      selectedMovieId: movieId[0]
+    });
   }
 
   getMovies(token) {
@@ -53,14 +66,16 @@ export class MainView extends React.Component {
   }
 
   onMovieClick(movie) {
+    //new
+    window.location.hash = '#' + movie._id;
     this.setState({
-      selectedMovie: movie
+      selectedMovieId: movie._id
     });
   }
 
   getBackClick() {
     this.setState({
-      selectedMovie: null
+      selectedMovieId: null
     });
   }
 
@@ -107,13 +122,17 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const {movies, selectedMovie, user, register} = this.state;
+    const {movies, selectedMovieId, user, register} = this.state;
 
     if (!user && register === false) return <LoginView onClick={() => this.register()} onLoggedIn={user => this.onLoggedIn(user)} />
 
     if (register) return <RegistrationView onClick={() => this.alreadyMember()} onSignedIn={user => this.onSignedIn(user)} />
 
     if (!movies) return <div className="main-view"/>;
+
+    //new
+    const selectedMovie = selectedMovieId ? movies.find(movie => movie._id === selectedMovieId) : null;
+
     return (
       <div className="main-view">
       <div className="logout">
