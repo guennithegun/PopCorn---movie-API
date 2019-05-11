@@ -40,6 +40,20 @@ export class MainView extends React.Component {
     });
   }
 
+  getMovies(token) {
+    axios.get('https://popcorn-movieapp.herokuapp.com/movies', {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      this.setState({
+        movies: response.data
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
@@ -53,7 +67,7 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log(authData.user._id);
     this.setState({
       user: authData.user.Username
     });
