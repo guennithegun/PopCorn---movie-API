@@ -6,6 +6,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
+import { Link } from 'react-router-dom';
+
 import './login-view.scss';
 
 ////////////
@@ -50,7 +53,12 @@ export function LoginView(props) {
       LOGIN
       </Button>
       <p>Not registered???</p>
-      <p>Start Enjoying <span onClick={() => props.onClick()}>HERE</span></p>
+      <p>
+        Start Enjoying
+        <Link to={'/register'}>
+          <span> HERE</span>
+        </Link>
+      </p>
     </Form>
   );
 }
@@ -59,6 +67,5 @@ export function LoginView(props) {
 // DEFINING PROPTYPES
 ////////////
 LoginView.propTypes = {
-  onLoggedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  onLoggedIn: PropTypes.func.isRequired
 };

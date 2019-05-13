@@ -4,6 +4,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+
+import { Link } from 'react-router-dom';
+
 import './movie-view.scss';
 
 ////////////
@@ -17,7 +20,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const {movie, onClick} = this.props;
+    const {movie} = this.props;
 
     if (!movie) return null;
 
@@ -40,9 +43,11 @@ export class MovieView extends React.Component {
           <div className="label">Director</div>
           <div className="value">{movie.Director.Name}</div>
         </div>
-        <Button variant="primary" type="button" onClick={() => onClick()} >
-        BACK
-        </Button>
+        <Link to={'/'}>
+          <Button variant="primary" type="button">
+          BACK
+          </Button>
+        </Link>
       </div>
     );
   }
@@ -62,6 +67,5 @@ MovieView.propTypes = {
     Director: PropTypes.shape({
       Name: PropTypes.string
     })
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+  }).isRequired
 };

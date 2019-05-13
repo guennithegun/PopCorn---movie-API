@@ -3,9 +3,11 @@
 ////////////
 import React, { useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
+import { Link } from 'react-router-dom';
+
 import './registration-view.scss';
 
 ////////////
@@ -29,7 +31,7 @@ export function RegistrationView(props) {
     .then(response => {
       const data = response.data;
       console.log(data);
-      window.open('/');
+      window.open('/', '_self');
     })
     .catch(event => {
       console.log('error registering the user')
@@ -65,15 +67,12 @@ export function RegistrationView(props) {
       <Button variant="primary" type="button" onClick={handleSubmit}>
       SIGN IN
       </Button>
-      <p>Already Member? <span onClick={() => props.onClick()}>LOG IN</span></p>
+      <p>
+        Already Member?
+        <Link to={'/'}>
+          <span> LOG IN</span>
+        </Link>
+      </p>
     </Form>
   );
 }
-
-////////////
-// DEFINING PROPTYPES
-////////////
-RegistrationView.propTypes = {
-  onSignedIn: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
-};
