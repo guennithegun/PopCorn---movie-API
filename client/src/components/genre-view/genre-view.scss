@@ -1,0 +1,17 @@
+$primary-color: #a71d31;
+$primary-color-transparent: rgba(167, 29, 49, 0.7);
+$secondary-color: #fde74c;
+$tertiary-color: #1ea896;
+
+.genre-view {
+  margin: 10px auto;
+  background-color: $primary-color-transparent;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  color: $secondary-color;
+}
+
+.genre-view h1 {
+  color: $tertiary-color;
+}
