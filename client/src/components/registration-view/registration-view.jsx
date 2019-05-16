@@ -39,6 +39,7 @@ export function RegistrationView(props) {
   };
 
   return (
+    <div className="registration-view">
     <Form>
       <h2>Sign In!</h2>
       <Form.Group controlId="formBasicUsername">
@@ -74,5 +75,6 @@ export function RegistrationView(props) {
         </Link>
       </p>
     </Form>
+    </div>
   );
 }

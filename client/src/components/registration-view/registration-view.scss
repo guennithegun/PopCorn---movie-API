@@ -3,7 +3,7 @@ $primary-color-transparent: rgba(167, 29, 49, 0.7);
 $secondary-color: #fde74c;
 $tertiary-color: #1ea896;
 
-form {
+.registration-view form {
   width: 90%;
   padding: 10px;
   margin: 70px auto;
@@ -61,7 +61,7 @@ form h2 {
 }
 
 @media only screen and (min-width: 500px) {
-  form {
+  .registration-view form {
     width: 450px;
   }
 }

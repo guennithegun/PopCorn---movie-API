@@ -5,6 +5,7 @@ import React from 'react';
 //import PropTypes from 'prop-types';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import { Link } from 'react-router-dom';
 
@@ -38,6 +39,12 @@ export class ProfileView extends React.Component {
     });
   }
 
+  toggleForm() {
+    let form = document.getElementsByClassName('changeDataForm')[0];
+    console.log(form);
+    form.classList.toggle('show-form');
+  }
+
   render() {
     const {user} = this.props;
 
@@ -45,7 +52,7 @@ export class ProfileView extends React.Component {
 
     return (
       <div className="profile-view">
-      <h1>Your Profile Data</h1>
+        <h1>Your Profile Data</h1>
         <div className="username">
           <div className="label">Name</div>
           <div className="value">{user.Username}</div>
@@ -74,6 +81,39 @@ export class ProfileView extends React.Component {
         <Button className="view-btn" variant="primary" type="button" onClick={(event) => this.deleteUser(event)}>
         DELETE
         </Button>
+        <Button className="view-btn" variant="primary" type="button" onClick={() => this.toggleForm()}>
+        CHANGE DATA
+        </Button>
+  
+        <Form className="changeDataForm">
+          <h2>Change Data</h2>
+          <Form.Group controlId="formBasicUsername">
+            <Form.Label >Your Username</Form.Label>
+            <Form.Control type="text" placeholder="Enter Username" />
+            <Form.Text className="text-muted">
+            Type your username here.
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Your Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Your Email</Form.Label>
+            <Form.Control type="email" placeholder="example@ema.il" />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicBirthday">
+            <Form.Label>Your Birthday</Form.Label>
+            <Form.Control type="text" placeholder="01.01.2000" />
+          </Form.Group>
+
+          <Button variant="primary" type="button" >
+          CHANGE!
+          </Button>
+        </Form>
       </div>
     );
   }

@@ -12,3 +12,29 @@ $tertiary-color: #1ea896;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   color: $secondary-color;
 }
+
+.profile-view .btn {
+  width: 150px;
+}
+
+.changeDataForm {
+  margin-top: 30px;
+  display: none;
+  border-top: 1px solid $tertiary-color;
+}
+
+.show-form {
+  display: inherit;
+  position: relative;
+  animation: formSlideDown .3s ease-in;
+}
+
+@keyframes formSlideDown {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
