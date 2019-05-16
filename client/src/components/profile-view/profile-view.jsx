@@ -41,8 +41,14 @@ export class ProfileView extends React.Component {
 
   toggleForm() {
     let form = document.getElementsByClassName('changeDataForm')[0];
+    let toggleButton = document.getElementById('toggleButton');
     console.log(form);
     form.classList.toggle('show-form');
+    if (form.classList.contains('show-form')) {
+      toggleButton.innerHTML= 'CHANGE DATA &uarr;';
+    } else {
+      toggleButton.innerHTML = 'CHANGE DATA &darr;';
+    }
   }
 
   render() {
@@ -81,10 +87,10 @@ export class ProfileView extends React.Component {
         <Button className="view-btn" variant="primary" type="button" onClick={(event) => this.deleteUser(event)}>
         DELETE
         </Button>
-        <Button className="view-btn" variant="primary" type="button" onClick={() => this.toggleForm()}>
-        CHANGE DATA
+        <Button id="toggleButton" className="view-btn" variant="primary" type="button" onClick={() => this.toggleForm()}>
+        CHANGE DATA &darr;
         </Button>
-  
+
         <Form className="changeDataForm">
           <h2>Change Data</h2>
           <Form.Group controlId="formBasicUsername">

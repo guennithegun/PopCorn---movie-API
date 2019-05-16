@@ -141,9 +141,9 @@ export class MainView extends React.Component {
             if (!movies || !movies.length) return <div className="main-view"/>;
             return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
           }/>
-        </div>
 
-        <Route exact path="/profile" render={() => <ProfileView user={profileData} />}/>
+          <Route exact path="/profile" render={() => <ProfileView user={profileData} />}/>
+        </div>
       </Router>
     );
   }
