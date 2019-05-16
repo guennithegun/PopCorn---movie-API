@@ -18,9 +18,15 @@ export class ProfileView extends React.Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      username: null,
+      password: null,
+      email: null,
+      birthday: null
+    };
   }
 
+  //delete user
   deleteUser(event) {
     event.preventDefault();
     axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}`, {
@@ -39,10 +45,38 @@ export class ProfileView extends React.Component {
     });
   }
 
+  //handle the changes
+  handleChange(event) {
+    this.setState( {[event.target.name]: event.target.value} )
+  }
+
+  //update user data
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.username);
+    axios.put(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}`, {
+      Username: this.state.username,
+      Password: this.state.password,
+      EMail: this.state.email,
+      Birthday: this.state.birthday
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+      console.log(response);
+      alert('Your data has been updated!');
+      //update localStorage
+      localStorage.setItem('user', this.state.username);
+    })
+    .catch(event => {
+      console.log('error updating the userdata');
+      alert('Ooooops... Something went wrong!');
+    });
+  };
+
   toggleForm() {
     let form = document.getElementsByClassName('changeDataForm')[0];
     let toggleButton = document.getElementById('toggleButton');
-    console.log(form);
     form.classList.toggle('show-form');
     if (form.classList.contains('show-form')) {
       toggleButton.innerHTML= 'CHANGE DATA &uarr;';
@@ -95,7 +129,7 @@ export class ProfileView extends React.Component {
           <h2>Change Data</h2>
           <Form.Group controlId="formBasicUsername">
             <Form.Label >Your Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter Username" />
+            <Form.Control type="text" name="username" onChange={event => this.handleChange(event)} placeholder="Enter Username" />
             <Form.Text className="text-muted">
             Type your username here.
             </Form.Text>
@@ -103,20 +137,20 @@ export class ProfileView extends React.Component {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Your Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control type="password" name="password" onChange={event => this.handleChange(event)} placeholder="Password" />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Your Email</Form.Label>
-            <Form.Control type="email" placeholder="example@ema.il" />
+            <Form.Control type="email" name="email" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
           </Form.Group>
 
           <Form.Group controlId="formBasicBirthday">
             <Form.Label>Your Birthday</Form.Label>
-            <Form.Control type="text" placeholder="01.01.2000" />
+            <Form.Control type="text" name="birthday" onChange={event => this.handleChange(event)} placeholder="01.01.2000" />
           </Form.Group>
 
-          <Button variant="primary" type="button" >
+          <Button variant="primary" type="button" onClick={event => this.handleSubmit(event)} >
           CHANGE!
           </Button>
         </Form>
