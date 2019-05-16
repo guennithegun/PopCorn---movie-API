@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import { Link } from 'react-router-dom';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -14,6 +15,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
+import { ProfileView } from '../profile-view/profile-view';
 
 import './main-view.scss';
 
@@ -25,7 +27,8 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      user: null
+      user: null,
+      profileData: null
     };
   }
 
@@ -57,9 +60,10 @@ export class MainView extends React.Component {
 
   //logging in
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log(authData.user);
     this.setState({
-      user: authData.user.Username
+      user: authData.user.Username,
+      profileData: authData.user
     });
 
     localStorage.setItem('token', authData.token);
@@ -98,7 +102,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const {movies, user} = this.state;
+    const {movies, user, profileData} = this.state;
 
     if (!movies) return <div className="main-view"/>;
 
@@ -106,6 +110,9 @@ export class MainView extends React.Component {
       <Router>
         <div className="main-view">
           <div className="navbar">
+            <Link to={'/profile'}>
+              <button>MyProfile</button>
+            </Link>
             <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
           </div>
           <Container>
@@ -135,6 +142,8 @@ export class MainView extends React.Component {
             return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
           }/>
         </div>
+
+        <Route exact path="/profile" render={() => <ProfileView user={profileData} />}/>
       </Router>
     );
   }
