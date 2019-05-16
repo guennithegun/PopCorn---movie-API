@@ -3,18 +3,27 @@ $primary-color-transparent: rgba(167, 29, 49, 0.7);
 $secondary-color: #fde74c;
 $tertiary-color: #1ea896;
 
+.main-view {
+  padding: 5px;
+}
+
 .container {
   margin-bottom: 50px;
 }
 
-.logout {
+.navbar {
   margin-top: 10px;
   margin-right: 10px;
   display: flex;
   justify-content: flex-end;
+  visibility: hidden;
 }
 
-.logout button {
+.show-navbar {
+  visibility: inherit;
+}
+
+.navbar button {
   background-color: $primary-color-transparent;
   border: none;
   border-radius: 3px;
@@ -24,7 +33,7 @@ $tertiary-color: #1ea896;
   padding: 5px;
 }
 
-.logout img {
+.navbar img {
   width: 16px;
   margin-left: 5px;
   padding-bottom: 3px;

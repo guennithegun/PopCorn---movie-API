@@ -65,6 +65,10 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+
+    //make navbar appear when logged in
+    let navbar = document.getElementsByClassName('navbar')[0];
+    navbar.classList.add('show-navbar');
   }
 
   //registrate new user
@@ -83,7 +87,14 @@ export class MainView extends React.Component {
     //resets user state to render again
     this.setState({
       user: null
-    })
+    });
+
+    //makes navbar disappear when logged out
+    let navbar = document.getElementsByClassName('navbar')[0];
+    navbar.classList.remove('show-navbar');
+
+    //make sure login screen appears after logging out
+    window.open('/', '_self');
   }
 
   render() {
@@ -94,19 +105,22 @@ export class MainView extends React.Component {
     return (
       <Router>
         <div className="main-view">
-        <div className="logout">
-          <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
-        </div>
-        <Container>
-        <Row>
-          <Route exact path="/" render={ () => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return movies.map(movie => (
-              <Col key={movie._id} xs={12} sm={6} md={4}>
-                <MovieCard key={movie._id} movie={movie} />
-              </Col>
-            ))}
-          }/>
+          <div className="navbar">
+            <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
+          </div>
+          <Container>
+            <Row>
+              <Route exact path="/" render={ () => {
+                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                return movies.map(movie => (
+                  <Col key={movie._id} xs={12} sm={6} md={4}>
+                    <MovieCard key={movie._id} movie={movie} />
+                  </Col>
+                ))}
+              }/>
+            </Row>
+          </Container>
+
           <Route exact path="/movies/:movieId" render={ ({match}) => <MovieView movie={movies.find(movies => movies._id === match.params.movieId)} />} />
 
           <Route exact path="/register" render={() => <RegistrationView onSignedIn={user => this.onSignedIn(user)} />} />
@@ -120,9 +134,6 @@ export class MainView extends React.Component {
             if (!movies || !movies.length) return <div className="main-view"/>;
             return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
           }/>
-
-        </Row>
-        </Container>
         </div>
       </Router>
     );
