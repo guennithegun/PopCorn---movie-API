@@ -128,7 +128,7 @@ export class MainView extends React.Component {
             </Row>
           </Container>
 
-          <Route exact path="/movies/:movieId" render={ ({match}) => <MovieView movie={movies.find(movies => movies._id === match.params.movieId)} />} />
+          <Route exact path="/movies/:movieId" render={ ({match}) => <MovieView user={profileData} movie={movies.find(movies => movies._id === match.params.movieId)} />} />
 
           <Route exact path="/genres/:name" render={ ({match}) => {
             if (!movies || !movies.length) return <div className="main-view"/>;

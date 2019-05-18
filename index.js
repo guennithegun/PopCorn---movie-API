@@ -307,6 +307,21 @@ app.put('/users/:username/movies/:movieid', passport.authenticate('jwt', { sessi
   })
 });
 
+// delete a movie from users favoriteMovies list
+app.delete('/users/:username/movies/:movieid', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOneAndUpdate({ Username : req.params.username}, { $pull : {
+    FavoriteMovies : req.params.movieid
+  }},
+  (error, updatedUser) => {
+    if (error) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    } else {
+      res.json(updatedUser)
+    }
+  })
+});
+
 // default textual response when request hits the root folder
 app.get('/', function(req, res) {
   res.send('Welcome to PopCorn. The best movie App ever :-P');

@@ -2,6 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
@@ -18,6 +19,25 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+
+  //add movie to FavoriteList
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.props.user.Username);
+    axios.put(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {
+      Username: this.props.user.Username
+    }, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+      console.log(response);
+      alert('Movie has been added to your Favorite List!');
+    })
+    .catch(event => {
+      console.log('error adding movie to list');
+      alert('Ooooops... Something went wrong!');
+    });
+  };
 
   render() {
     const {movie} = this.props;
@@ -58,6 +78,9 @@ export class MovieView extends React.Component {
           DIRECTOR
           </Button>
         </Link>
+        <Button className="view-btn" variant="primary" type="button" onClick={event => this.handleSubmit(event)}>
+        LIKE
+        </Button>
       </div>
     );
   }

@@ -111,7 +111,13 @@ export class ProfileView extends React.Component {
         </div>
         <div className="favoriteMovies">
           <div className="label">Favorite Movies</div>
-          <div className="value">{user.FavoriteMovies}</div>
+          {user.FavoriteMovies.length === 0 &&
+            <div className="value">Your Favorite Movie List is empty :-(</div>
+          }
+          {
+            user.FavoriteMovies.length > 0 &&
+            <div className="value">{user.FavoriteMovies}</div>
+          }
         </div>
         <Link to={'/'}>
           <Button className="view-btn" variant="primary" type="button">
