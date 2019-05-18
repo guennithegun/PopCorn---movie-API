@@ -2,7 +2,6 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import React from 'react';
-//import PropTypes from 'prop-types';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -22,7 +21,8 @@ export class ProfileView extends React.Component {
       username: null,
       password: null,
       email: null,
-      birthday: null
+      birthday: null,
+      favoriteMovies: []
     };
   }
 
@@ -43,6 +43,22 @@ export class ProfileView extends React.Component {
     .catch(event => {
       alert('failed to delete user');
     });
+  }
+
+  // delete movie from list
+  deleteMovie(event, favoriteMovie) {
+    event.preventDefault();
+    console.log(favoriteMovie);
+    axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}/movies/${favoriteMovie}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+      alert('Movie has been removed from list!');
+    })
+    .catch(event => {
+      alert('Oops... something went wrong...');
+    });
+
   }
 
   //handle the changes
@@ -74,7 +90,9 @@ export class ProfileView extends React.Component {
     });
   };
 
+  //toggle CHangeData form
   toggleForm() {
+    console.log(this.props.user.FavoriteMovies);
     let form = document.getElementsByClassName('changeDataForm')[0];
     let toggleButton = document.getElementById('toggleButton');
     form.classList.toggle('show-form');
@@ -86,7 +104,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const {user} = this.props;
+    const {user, movies} = this.props;
 
     if (!user) return null;
 
@@ -116,7 +134,7 @@ export class ProfileView extends React.Component {
           }
           {
             user.FavoriteMovies.length > 0 &&
-            <div className="value">{user.FavoriteMovies}</div>
+            <div className="value">{user.FavoriteMovies.map(favoriteMovie => (<p key={favoriteMovie}>{movies.find(movie => movie._id === favoriteMovie).Title}<span onClick={(event) => this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}</div>
           }
         </div>
         <Link to={'/'}>
@@ -164,20 +182,3 @@ export class ProfileView extends React.Component {
     );
   }
 }
-
-////////////
-// DEFINING PROPTYPES
-////////////
-// ProfileView.propTypes = {
-//   movie: PropTypes.shape({
-//     Title: PropTypes.string,
-//     Description: PropTypes.string,
-//     ImagePath: PropTypes.string,
-//     Genre: PropTypes.shape({
-//       Name: PropTypes.string
-//     }),
-//     Director: PropTypes.shape({
-//       Name: PropTypes.string
-//     })
-//   }).isRequired
-// };

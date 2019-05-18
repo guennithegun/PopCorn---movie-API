@@ -142,7 +142,7 @@ export class MainView extends React.Component {
 
           <Route exact path="/register" render={() => <RegistrationView onSignedIn={user => this.onSignedIn(user)} />} />
 
-          <Route exact path="/profile" render={() => <ProfileView user={profileData} />}/>
+          <Route exact path="/profile" render={() => <ProfileView movies={movies} user={profileData} />}/>
         </div>
       </Router>
     );
