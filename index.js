@@ -239,6 +239,18 @@ app.post('/users', (req, res) => {
   });
 });
 
+// get specific user
+app.get('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username : req.params.username })
+  .then((user) => {
+    res.status(201).json(user)
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
+});
+
 // deletes user from users by ID
 app.delete('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndRemove({ Username : req.params.username})
