@@ -69,10 +69,6 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
-
-    //make navbar appear when logged in
-    let navbar = document.getElementsByClassName('navbar')[0];
-    navbar.classList.add('show-navbar');
   }
 
   //registrate new user
@@ -93,10 +89,6 @@ export class MainView extends React.Component {
       user: null
     });
 
-    //makes navbar disappear when logged out
-    let navbar = document.getElementsByClassName('navbar')[0];
-    navbar.classList.remove('show-navbar');
-
     //make sure login screen appears after logging out
     window.open('/', '_self');
   }
@@ -109,12 +101,14 @@ export class MainView extends React.Component {
     return (
       <Router>
         <div className="main-view">
-          <div className="navbar">
-            <Link to={'/profile'}>
-              <button>MyProfile</button>
-            </Link>
-            <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
-          </div>
+          {user &&
+            <div className="navbar">
+              <Link to={'/profile'}>
+                <button>MyProfile</button>
+              </Link>
+              <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
+            </div>
+          }
           <Container>
             <Row>
               <Route exact path="/" render={ () => {
