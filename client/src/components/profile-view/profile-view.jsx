@@ -22,14 +22,38 @@ export class ProfileView extends React.Component {
       password: null,
       email: null,
       birthday: null,
-      favoriteMovies: []
+      userData: null
     };
+  }
+
+  componentDidMount() {
+    //authentication
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.getUser(accessToken);
+    }
+  }
+
+  //get user
+  getUser(token) {
+    let username = localStorage.getItem('user');
+    axios.get(`https://popcorn-movieapp.herokuapp.com/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      this.setState({
+        userData: response.data
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   //delete user
   deleteUser(event) {
     event.preventDefault();
-    axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}`, {
+    axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
     .then(response => {
@@ -49,7 +73,7 @@ export class ProfileView extends React.Component {
   deleteMovie(event, favoriteMovie) {
     event.preventDefault();
     console.log(favoriteMovie);
-    axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}/movies/${favoriteMovie}`, {
+    axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${favoriteMovie}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
     .then(response => {
@@ -58,7 +82,6 @@ export class ProfileView extends React.Component {
     .catch(event => {
       alert('Oops... something went wrong...');
     });
-
   }
 
   //handle the changes
@@ -70,7 +93,7 @@ export class ProfileView extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.username);
-    axios.put(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}`, {
+    axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
       Username: this.state.username,
       Password: this.state.password,
       EMail: this.state.email,
@@ -83,6 +106,7 @@ export class ProfileView extends React.Component {
       alert('Your data has been updated!');
       //update localStorage
       localStorage.setItem('user', this.state.username);
+      window.open('/profile', '_self');
     })
     .catch(event => {
       console.log('error updating the userdata');
@@ -92,7 +116,6 @@ export class ProfileView extends React.Component {
 
   //toggle CHangeData form
   toggleForm() {
-    console.log(this.props.user.FavoriteMovies);
     let form = document.getElementsByClassName('changeDataForm')[0];
     let toggleButton = document.getElementById('toggleButton');
     form.classList.toggle('show-form');
@@ -104,16 +127,17 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const {user, movies} = this.props;
+    const {userData} = this.state;
+    const {movies} = this.props;
 
-    if (!user) return null;
+    if (!userData) return null;
 
     return (
       <div className="profile-view">
         <h1>Your Profile Data</h1>
         <div className="username">
           <div className="label">Name</div>
-          <div className="value">{user.Username}</div>
+          <div className="value">{userData.Username}</div>
         </div>
         <div className="password">
           <div className="label">Password</div>
@@ -121,22 +145,23 @@ export class ProfileView extends React.Component {
         </div>
         <div className="birthday">
           <div className="label">Birthday</div>
-          <div className="value">{user.Birthday}</div>
+          <div className="value">{userData.Birthday}</div>
         </div>
         <div className="email">
           <div className="label">EMail</div>
-          <div className="value">{user.EMail}</div>
+          <div className="value">{userData.EMail}</div>
         </div>
+
         <div className="favoriteMovies">
           <div className="label">Favorite Movies</div>
-          {user.FavoriteMovies.length === 0 &&
+          {userData.FavoriteMovies.length === 0 &&
             <div className="value">Your Favorite Movie List is empty :-(</div>
           }
-          {
-            user.FavoriteMovies.length > 0 &&
-            <div className="value">{user.FavoriteMovies.map(favoriteMovie => (<p key={favoriteMovie}>{movies.find(movie => movie._id === favoriteMovie).Title}<span onClick={(event) => this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}</div>
+          {userData.FavoriteMovies.length > 0 &&
+            <div className="value">{userData.FavoriteMovies.map(favoriteMovie => (<p key={favoriteMovie}>{movies.find(movie => movie._id === favoriteMovie).Title}<span onClick={(event) => this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}</div>
           }
         </div>
+
         <Link to={'/'}>
           <Button className="view-btn" variant="primary" type="button">
           BACK
