@@ -23,9 +23,8 @@ export class MovieView extends React.Component {
   //add movie to FavoriteList
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.props.user.Username);
-    axios.put(`https://popcorn-movieapp.herokuapp.com/users/${this.props.user.Username}/movies/${this.props.movie._id}`, {
-      Username: this.props.user.Username
+    axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${this.props.movie._id}`, {
+      Username: localStorage.getItem('user')
     }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })

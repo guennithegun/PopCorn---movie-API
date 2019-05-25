@@ -22,7 +22,12 @@ export class ProfileView extends React.Component {
       password: null,
       email: null,
       birthday: null,
-      userData: null
+      userData: null,
+      favoriteMovies: [],
+      usernameForm: null,
+      passwordForm: null,
+      emailForm: null,
+      birthdayForm: null
     };
   }
 
@@ -42,7 +47,12 @@ export class ProfileView extends React.Component {
     })
     .then(response => {
       this.setState({
-        userData: response.data
+        userData: response.data,
+        username: response.data.Username,
+        password: response.data.Password,
+        email: response.data.EMail,
+        birthday: response.data.Birthday,
+        favoriteMovies: response.data.FavoriteMovies
       });
     })
     .catch(function (error) {
@@ -77,7 +87,8 @@ export class ProfileView extends React.Component {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
     .then(response => {
-      alert('Movie has been removed from list!');
+      // update state with current movie data
+      this.getUser(localStorage.getItem('token'));
     })
     .catch(event => {
       alert('Oops... something went wrong...');
@@ -94,10 +105,10 @@ export class ProfileView extends React.Component {
     event.preventDefault();
     console.log(this.state.username);
     axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
-      Username: this.state.username,
-      Password: this.state.password,
-      EMail: this.state.email,
-      Birthday: this.state.birthday
+      Username: this.state.usernameForm,
+      Password: this.state.passwordForm,
+      EMail: this.state.emailForm,
+      Birthday: this.state.birthdayForm
     }, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
@@ -105,8 +116,11 @@ export class ProfileView extends React.Component {
       console.log(response);
       alert('Your data has been updated!');
       //update localStorage
-      localStorage.setItem('user', this.state.username);
-      window.open('/profile', '_self');
+      localStorage.setItem('user', this.state.usernameForm);
+      // call getUser() to dusplay changed userdata after submission
+      this.getUser(localStorage.getItem('token'));
+      // reset form after submitting data
+      document.getElementsByClassName('changeDataForm')[0].reset();
     })
     .catch(event => {
       console.log('error updating the userdata');
@@ -127,8 +141,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const {userData} = this.state;
-    const {movies} = this.props;
+    const {userData, username, email, birthday, favoriteMovies} = this.state;
 
     if (!userData) return null;
 
@@ -137,7 +150,7 @@ export class ProfileView extends React.Component {
         <h1>Your Profile Data</h1>
         <div className="username">
           <div className="label">Name</div>
-          <div className="value">{userData.Username}</div>
+          <div className="value">{username}</div>
         </div>
         <div className="password">
           <div className="label">Password</div>
@@ -145,20 +158,20 @@ export class ProfileView extends React.Component {
         </div>
         <div className="birthday">
           <div className="label">Birthday</div>
-          <div className="value">{userData.Birthday}</div>
+          <div className="value">{birthday}</div>
         </div>
         <div className="email">
           <div className="label">EMail</div>
-          <div className="value">{userData.EMail}</div>
+          <div className="value">{email}</div>
         </div>
 
         <div className="favoriteMovies">
           <div className="label">Favorite Movies</div>
-          {userData.FavoriteMovies.length === 0 &&
+          {favoriteMovies.length === 0 &&
             <div className="value">Your Favorite Movie List is empty :-(</div>
           }
-          {userData.FavoriteMovies.length > 0 &&
-            <div className="value">{userData.FavoriteMovies.map(favoriteMovie => (<p key={favoriteMovie}>{movies.find(movie => movie._id === favoriteMovie).Title}<span onClick={(event) => this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}</div>
+          {favoriteMovies.length > 0 &&
+            <div className="value">{favoriteMovies.map(favoriteMovie => (<p key={favoriteMovie}>{JSON.parse(localStorage.getItem('movies')).find(movie => movie._id === favoriteMovie).Title}<span onClick={(event) => this.deleteMovie(event, favoriteMovie)}> Delete</span></p>))}</div>
           }
         </div>
 
@@ -178,7 +191,7 @@ export class ProfileView extends React.Component {
           <h2>Change Data</h2>
           <Form.Group controlId="formBasicUsername">
             <Form.Label >Your Username</Form.Label>
-            <Form.Control type="text" name="username" onChange={event => this.handleChange(event)} placeholder="Enter Username" />
+            <Form.Control type="text" name="usernameForm" onChange={event => this.handleChange(event)} placeholder="Enter Username" />
             <Form.Text className="text-muted">
             Type your username here.
             </Form.Text>
@@ -186,17 +199,17 @@ export class ProfileView extends React.Component {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Your Password</Form.Label>
-            <Form.Control type="password" name="password" onChange={event => this.handleChange(event)} placeholder="Password" />
+            <Form.Control type="password" name="passwordForm" onChange={event => this.handleChange(event)} placeholder="Password" />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Your Email</Form.Label>
-            <Form.Control type="email" name="email" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
+            <Form.Control type="email" name="emailForm" onChange={event => this.handleChange(event)} placeholder="example@ema.il" />
           </Form.Group>
 
           <Form.Group controlId="formBasicBirthday">
             <Form.Label>Your Birthday</Form.Label>
-            <Form.Control type="text" name="birthday" onChange={event => this.handleChange(event)} placeholder="01.01.2000" />
+            <Form.Control type="text" name="birthdayForm" onChange={event => this.handleChange(event)} placeholder="01.01.2000" />
           </Form.Group>
 
           <Button variant="primary" type="button" onClick={event => this.handleSubmit(event)} >

@@ -52,6 +52,7 @@ export class MainView extends React.Component {
       this.setState({
         movies: response.data
       });
+      localStorage.setItem('movies', JSON.stringify(this.state.movies));
     })
     .catch(function (error) {
       console.log(error);
@@ -83,6 +84,7 @@ export class MainView extends React.Component {
     //clears storage
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('movies');
 
     //resets user state to render again
     this.setState({
@@ -136,7 +138,7 @@ export class MainView extends React.Component {
 
           <Route exact path="/register" render={() => <RegistrationView onSignedIn={user => this.onSignedIn(user)} />} />
 
-          <Route exact path="/profile" render={() => <ProfileView movies={movies} user={profileData} />}/>
+          <Route exact path="/profile" render={() => <ProfileView />}/>
         </div>
       </Router>
     );
