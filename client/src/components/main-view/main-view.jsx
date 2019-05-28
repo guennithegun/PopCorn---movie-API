@@ -19,7 +19,7 @@ import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
+import MovieView from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -137,7 +137,9 @@ export class MainView extends React.Component {
             </Row>
           </Container>
 
-          <Route exact path="/movies/:movieId" render={ ({match}) => <MovieView user={profileData} movie={movies.find(movies => movies._id === match.params.movieId)} />} />
+          {/*<Route exact path="/movies/:movieId" render={ ({match}) => <MovieView user={profileData} movie={movies.find(movies => movies._id === match.params.movieId)} />} />*/}
+
+          <Route exact path="/movies/:id" render={({ match }) => <MovieView movieId={match.params.id}/>}/>
 
           <Route exact path="/genres/:name" render={ ({match}) => {
             if (!movies || !movies.length) return <div className="main-view"/>;
