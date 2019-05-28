@@ -3,6 +3,7 @@
 ////////////
 import React from 'react';
 import { connect } from 'react-redux';
+import Col from 'react-bootstrap/Col';
 
 import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { MovieCard } from '../movie-card/movie-card';
@@ -37,7 +38,7 @@ function MoviesList(props) {
     <Col key={movie._id} xs={12} sm={6} md={4}>
       <MovieCard key={movie._id} movie={movie} />
     </Col>
-    ));
+    ))
     }
     </div>;
 }
