@@ -3,12 +3,19 @@
 ////////////
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+
 import { Link } from 'react-router-dom';
 
+import { setMovies } from '../../actions/actions';
+
+//import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
