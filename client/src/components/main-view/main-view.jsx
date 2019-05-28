@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 
 import { setMovies } from '../../actions/actions';
 
-//import MoviesList from '../movies-list/movies-list';
+import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -33,7 +33,7 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
+      //movies: [],
       user: null,
       profileData: null
     };
@@ -56,10 +56,11 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      this.setState({
-        movies: response.data
-      });
-      localStorage.setItem('movies', JSON.stringify(this.state.movies));
+      // this.setState({
+      //   movies: response.data
+      // });
+      //localStorage.setItem('movies', JSON.stringify(this.state.movies));
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -120,14 +121,19 @@ export class MainView extends React.Component {
           }
           <Container>
             <Row>
-              <Route exact path="/" render={ () => {
+              {/*<Route exact path="/" render={ () => {
                 if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
                 return movies.map(movie => (
                   <Col key={movie._id} xs={12} sm={6} md={4}>
                     <MovieCard key={movie._id} movie={movie} />
                   </Col>
                 ))}
-              }/>
+              }/>*/}
+              <Route exact path="/" render={() => {
+                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+                return <MoviesList />;
+                }}
+              />
             </Row>
           </Container>
 
@@ -151,3 +157,5 @@ export class MainView extends React.Component {
     );
   }
 }
+
+export default connect(null, { setMovies } )(MainView);
