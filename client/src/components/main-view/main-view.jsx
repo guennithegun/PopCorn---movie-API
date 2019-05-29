@@ -99,6 +99,15 @@ export class MainView extends React.Component {
 
     return (
       <Router>
+        <header>
+          <h1>PopCorn</h1>
+          <div>
+            <img src="/img/popcornclient.png" alt="Popcorn bucket"/>
+            <img src="/img/popcornclient.png" alt="Popcorn bucket"/>
+            <img src="/img/popcornclient.png" alt="Popcorn bucket"/>
+          </div>
+          <p>Enjoy Responsable.</p>
+        </header>
         <div className="main-view">
           {user &&
             <div className="navbar">

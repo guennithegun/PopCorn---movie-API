@@ -12,10 +12,9 @@ $tertiary-color: #1ea896;
 }
 
 .navbar {
-  margin-top: 10px;
-  margin-right: 10px;
   display: flex;
   justify-content: flex-end;
+  padding: 0;
 }
 
 .navbar button {
