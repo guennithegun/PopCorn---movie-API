@@ -8,11 +8,14 @@ import Form from 'react-bootstrap/Form';
 
 import { setFilter } from '../../actions/actions';
 
+import './visibility-filter-input.scss';
+
 function VisibilityFilterInput(props) {
   return <Form.Control
+    className="visibilityFilterForm"
     onChange={event => props.setFilter(event.target.value)}
     value={props.visibilityFilter}
-    placeholder='filter'
+    placeholder='filter movies'
   />;
 }
 
