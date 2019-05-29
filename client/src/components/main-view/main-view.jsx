@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Container from 'react-bootstrap/Container';
-
 import { Link } from 'react-router-dom';
 
 import { setMovies } from '../../actions/actions';
@@ -18,7 +14,6 @@ import { setMovies } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
-import { MovieCard } from '../movie-card/movie-card';
 import MovieView from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -34,8 +29,7 @@ export class MainView extends React.Component {
     super();
     this.state = {
       //movies: [],
-      user: null,
-      profileData: null
+      user: null
     };
   }
 
@@ -56,11 +50,8 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      // this.setState({
-      //   movies: response.data
-      // });
-      //localStorage.setItem('movies', JSON.stringify(this.state.movies));
       this.props.setMovies(response.data);
+      localStorage.setItem('movies', JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
@@ -104,9 +95,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const {movies, user, profileData} = this.state;
-
-    if (!movies) return <div className="main-view"/>;
+    const { movies, user } = this.state;
 
     return (
       <Router>
@@ -119,25 +108,12 @@ export class MainView extends React.Component {
               <button onClick={() => this.logOut()}>LogOut <img src="/img/exit.png" alt="shut down button sign"/></button>
             </div>
           }
-          <Container>
-            <Row>
-              {/*<Route exact path="/" render={ () => {
-                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-                return movies.map(movie => (
-                  <Col key={movie._id} xs={12} sm={6} md={4}>
-                    <MovieCard key={movie._id} movie={movie} />
-                  </Col>
-                ))}
-              }/>*/}
-              <Route exact path="/" render={() => {
-                if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-                return <MoviesList />;
-                }}
-              />
-            </Row>
-          </Container>
 
-          {/*<Route exact path="/movies/:movieId" render={ ({match}) => <MovieView user={profileData} movie={movies.find(movies => movies._id === match.params.movieId)} />} />*/}
+          <Route exact path="/" render={() => {
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            return <MoviesList />;
+            }}
+          />
 
           <Route exact path="/movies/:id" render={({ match }) => <MovieView movieId={match.params.id}/>}/>
 
