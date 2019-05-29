@@ -29,6 +29,22 @@ $tertiary-color: #1ea896;
   animation: formSlideDown .3s ease-in;
 }
 
+.favorite-movies {
+  display: flex;
+  justify-content: flex-start;
+  overflow:scroll;
+}
+
+.movie-image {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.movie-image img {
+  width: 150px;
+}
+
 @keyframes formSlideDown {
   from {
     opacity: 0;

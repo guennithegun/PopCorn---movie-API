@@ -4,18 +4,19 @@ $secondary-color: #fde74c;
 $tertiary-color: #1ea896;
 
 .visibilityFilterForm {
-  margin: 0 auto;
+  margin: 10px auto;
   width: 300px;
-  background-color: $tertiary-color;
-  border: none;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  background-color: transparent;
+  border: 2px solid $tertiary-color;
 }
 
 .visibilityFilterForm:focus {
-  background-color: $tertiary-color;
+  background-color: transparent;
   outline-offset: none;
   box-shadow: none;
   color: white;
+  border: 2px solid $tertiary-color;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 .visibilityFilterForm::placeholder {
