@@ -18,7 +18,7 @@ function VisibilityFilterInput(props) {
     value={props.visibilityFilter}
     placeholder='filter movies'
   />
-  <Form.Control as="select">
+  <Form.Control as="select" className="selectFilter">
       <option>Title</option>
       <option>Genre</option>
       <option>Director</option>
