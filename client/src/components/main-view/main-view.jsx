@@ -15,7 +15,7 @@ import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import MovieView from '../movie-view/movie-view';
-import { DirectorView } from '../director-view/director-view';
+import DirectorView from '../director-view/director-view';
 import GenreView from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 
@@ -28,7 +28,6 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      //movies: [],
       user: null
     };
   }
@@ -95,7 +94,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
+    const { user } = this.state;
 
     return (
       <Router>
@@ -128,10 +127,14 @@ export class MainView extends React.Component {
 
           <Route exact path="/genres/:name" render={({ match }) => <GenreView genreName={match.params.name}/>}/>
 
+          {/*
           <Route path="/directors/:name" render={({ match }) => {
             if (!movies || !movies.length) return <div className="main-view"/>;
             return <DirectorView director={movies.find(movie => movie.Director.Name === match.params.name).Director}/>}
           }/>
+          */}
+
+          <Route exact path="/directors/:name" render={({ match }) => <DirectorView directorName={match.params.name}/>}/>
 
           <Route exact path="/register" render={() => <RegistrationView onSignedIn={user => this.onSignedIn(user)} />} />
 
