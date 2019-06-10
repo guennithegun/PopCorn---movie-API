@@ -158,7 +158,7 @@ export class ProfileView extends React.Component {
         </div>
         <div className="birthday">
           <div className="label">Birthday</div>
-          <div className="value">{birthday}</div>
+          <div className="value">{birthday.substr(-24, 10)}</div>
         </div>
         <div className="email">
           <div className="label">EMail</div>
