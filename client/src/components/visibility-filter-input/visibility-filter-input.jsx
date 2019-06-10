@@ -25,9 +25,9 @@ function VisibilityFilterInput(props) {
     onChange={event => props.setSortColumn(event.target.value)}
     value={props.sortColumn}
   >
-      <option>Title</option>
-      <option>Genre</option>
-      <option>Director</option>
+    <option>Title</option>
+    <option>Genre</option>
+    <option>Director</option>
   </Form.Control>
   </Form>
 }
