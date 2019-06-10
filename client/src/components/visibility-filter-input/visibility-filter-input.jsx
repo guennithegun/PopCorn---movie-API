@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 
 import { setFilter } from '../../actions/actions';
+import { setSortColumn } from '../../actions/actions';
 
 import './visibility-filter-input.scss';
 
@@ -18,7 +19,12 @@ function VisibilityFilterInput(props) {
     value={props.visibilityFilter}
     placeholder='filter movies'
   />
-  <Form.Control as="select" className="selectFilter">
+  <Form.Control
+    as="select"
+    className="selectFilter"
+    onChange={event => props.setSortColumn(event.target.value)}
+    value={props.sortColumn}
+  >
       <option>Title</option>
       <option>Genre</option>
       <option>Director</option>
@@ -27,6 +33,6 @@ function VisibilityFilterInput(props) {
 }
 
 export default connect(
-  ({visibilityFilter}) => ({visibilityFilter}),
-  { setFilter }
+  ({visibilityFilter, sortColumn}) => ({visibilityFilter, sortColumn}),
+  { setFilter, setSortColumn }
 )(VisibilityFilterInput);

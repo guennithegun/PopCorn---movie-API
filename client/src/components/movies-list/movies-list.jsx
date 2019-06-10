@@ -20,8 +20,16 @@ const mapStateToProps = state => {
     return 0
   });
 
-  if (visibilityFilter !== '') {
+  if (visibilityFilter !== '' && sortColumn === 'Title') {
     moviesToShow = moviesToShow.filter(movie => movie.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
+  }
+
+  if (visibilityFilter !== '' && sortColumn === 'Genre') {
+    moviesToShow = moviesToShow.filter(movie => movie.Genre.Name.toLowerCase().includes(visibilityFilter.toLowerCase()));
+  }
+
+  if (visibilityFilter !== '' && sortColumn === 'Director') {
+    moviesToShow = moviesToShow.filter(movie => movie.Director.Name.toLowerCase().includes(visibilityFilter.toLowerCase()));
   }
 
   return { movies: moviesToShow };

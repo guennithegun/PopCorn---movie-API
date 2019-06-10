@@ -17,7 +17,7 @@ function visibilityFilter(state = '', action) {
   }
 }
 
-function sortColumn(state = 'title', action) {
+function sortColumn(state = 'Title', action) {
   switch (action.type) {
     case SET_SORT_COLUMN:
       return action.value;
