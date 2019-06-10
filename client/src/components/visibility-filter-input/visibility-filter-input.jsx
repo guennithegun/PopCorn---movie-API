@@ -11,12 +11,19 @@ import { setFilter } from '../../actions/actions';
 import './visibility-filter-input.scss';
 
 function VisibilityFilterInput(props) {
-  return <Form.Control
+  return <Form>
+  <Form.Control
     className="visibilityFilterForm"
     onChange={event => props.setFilter(event.target.value)}
     value={props.visibilityFilter}
     placeholder='filter movies'
-  />;
+  />
+  <Form.Control as="select">
+      <option>Title</option>
+      <option>Genre</option>
+      <option>Director</option>
+  </Form.Control>
+  </Form>
 }
 
 export default connect(
