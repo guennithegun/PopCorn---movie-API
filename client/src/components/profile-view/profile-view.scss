@@ -14,7 +14,7 @@ $tertiary-color: #1ea896;
 }
 
 .profile-view .btn {
-  width: 160px;
+  width: 100px;
 }
 
 .changeDataForm {
@@ -43,6 +43,10 @@ $tertiary-color: #1ea896;
 
 .movie-image img {
   width: 150px;
+}
+
+#toggleButton {
+  width: 160px;
 }
 
 @keyframes formSlideDown {
