@@ -2,7 +2,7 @@
 // IMPORT ALL NECESSARY MODULES AND FILES
 ////////////
 import { combineReducers } from 'redux';
-import { SET_MOVIES, SET_FILTER, SET_SORT_COLUMN } from '../actions/actions.js';
+import { SET_MOVIES, SET_FILTER, SET_SORT_COLUMN, SET_LOGGEDIN_USER } from '../actions/actions.js';
 
 ////////////
 // FUNCTIONS
@@ -35,10 +35,20 @@ function movies(state = [], action) {
   }
 }
 
+function loggedInUser(state = [], action) {
+  switch (action.type) {
+    case SET_LOGGEDIN_USER:
+      return action.value;
+    default:
+      return state;
+  }
+}
+
 const moviesApp = combineReducers({
   visibilityFilter,
   sortColumn,
-  movies
+  movies,
+  loggedInUser
 });
 
 

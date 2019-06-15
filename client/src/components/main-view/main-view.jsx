@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setLoggedInUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 import { LoginView } from '../login-view/login-view';
@@ -60,11 +60,12 @@ export class MainView extends React.Component {
   //logging in
   onLoggedIn(authData) {
     console.log(authData.user);
-    this.setState({
-      user: authData.user.Username,
-      profileData: authData.user
-    });
+    // this.setState({
+    //   user: authData.user.Username
+    // });
 
+    this.props.setLoggedInUser(authData.user.Username);
+    console.log(this.props.loggedInUser);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
@@ -94,7 +95,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { loggedInUser } = this.state;
 
     return (
       <Router>
@@ -108,7 +109,7 @@ export class MainView extends React.Component {
           <p>Enjoy Responsable.</p>
         </header>
         <div className="main-view">
-          {user &&
+          {loggedInUser &&
             <div className="navbar">
               <Link to={'/profile'}>
                 <button>MyProfile</button>
@@ -118,7 +119,7 @@ export class MainView extends React.Component {
           }
 
           <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            if (!loggedInUser) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return <MoviesList />;
             }}
           />
@@ -138,4 +139,4 @@ export class MainView extends React.Component {
   }
 }
 
-export default connect(null, { setMovies } )(MainView);
+export default connect(null, { setMovies, setLoggedInUser } )(MainView);
