@@ -59,11 +59,9 @@ export class MainView extends React.Component {
 
   //logging in
   onLoggedIn(authData) {
-    console.log(authData.user);
-    // this.setState({
-    //   user: authData.user.Username
-    // });
-
+    this.setState({
+      user: authData.user.Username
+    });
     this.props.setLoggedInUser(authData.user.Username);
     console.log(this.props.setLoggedInUser(authData.user.Username));
     localStorage.setItem('token', authData.token);
@@ -95,7 +93,7 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { loggedInUser } = this.state;
+    const { user } = this.state;
 
     return (
       <Router>
@@ -109,7 +107,7 @@ export class MainView extends React.Component {
           <p>Enjoy Responsable.</p>
         </header>
         <div className="main-view">
-          {loggedInUser &&
+          {user &&
             <div className="navbar">
               <Link to={'/profile'}>
                 <button>MyProfile</button>
@@ -119,7 +117,7 @@ export class MainView extends React.Component {
           }
 
           <Route exact path="/" render={() => {
-            if (!loggedInUser) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
             return <MoviesList />;
             }}
           />
