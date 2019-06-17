@@ -40,6 +40,7 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user')
       });
       this.getMovies(accessToken);
+      this.getUser(accessToken);
     }
   }
 
@@ -57,13 +58,26 @@ export class MainView extends React.Component {
     });
   }
 
+  // get user
+  getUser(token) {
+    let username = localStorage.getItem('user');
+    axios.get(`https://popcorn-movieapp.herokuapp.com/users/${username}`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      this.props.setLoggedInUser(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   //logging in
   onLoggedIn(authData) {
     this.setState({
       user: authData.user.Username
     });
-    this.props.setLoggedInUser(authData.user.Username);
-    console.log(this.props.setLoggedInUser(authData.user.Username));
+    this.props.setLoggedInUser(authData.user);
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
