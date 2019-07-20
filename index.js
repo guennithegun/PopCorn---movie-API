@@ -343,10 +343,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// default textual response when request hits the root folder
-app.get('/', function(req, res) {
-  res.send('Welcome to PopCorn. The best movie App ever :-P');
-});
+// // default textual response when request hits the root folder
+// app.get('/', function(req, res) {
+//   res.send('Welcome to PopCorn. The best movie App ever :-P');
+// });
 
 /////////////
 // APP Listener
