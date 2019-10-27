@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteMovie(event,favoriteMovie)%7Bevent.preventDefault();console.log(favoriteMovie);axios.delete(%60https://popcorn-movieapp.herokuapp.com/users/$%7BlocalStorage.getItem('user')%7D/movies/$%7BfavoriteMovie%7D%60,%7Bheaders:%7BAuthorization:%60Bearer$%7BlocalStorage.getItem('token')%7D%60%7D%7D).then(response=%3E%7B//updatestatewithcurrentmoviedatathis.getUser(localStorage.getItem('token'));%7D).catch(event=%3E%7Balert('Oops...somethingwentwrong...');%7D);%7Dexampleresponse:Atextmessageindicatingwhetherthemoviewassuccessfullyremoved."><span class="type-signature"></span>deleteMovie(event, favoriteMovie) {
+ event.preventDefault();
+ console.log(favoriteMovie);
+ axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${favoriteMovie}`, {
+   headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+ })
+ .then(response => {
+   // update state with current movie data
+   this.getUser(localStorage.getItem('token'));
+ })
+ .catch(event => {
+   alert('Oops... something went wrong...');
+ });
+}
+example response:
+A text message indicating whether the movie was successfully removed.<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    deletes a movie from the topMovies list by name
+endpoint URL: /movies/:title
+DELETE request
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line207">line 207</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getMovies(token)%7Baxios.get('https://popcorn-movieapp.herokuapp.com/movies',%7Bheaders:%7BAuthorization:%60Bearer$%7Btoken%7D%60%7D%7D).then(response=%3E%7Bthis.props.setMovies(response.data);localStorage.setItem('movies',JSON.stringify(response.data));%7D).catch(function(error)%7Bconsole.log(error);%7D);%7Dexampleresponse:"><span class="type-signature"></span>getMovies(token) {
+   axios.get('https://popcorn-movieapp.herokuapp.com/movies', {
+     headers: { Authorization: `Bearer ${token}` }
+   })
+   .then(response => {
+     this.props.setMovies(response.data);
+     localStorage.setItem('movies', JSON.stringify(response.data));
+   })
+   .catch(function(error) {
+     console.log(error);
+   });
+  }
+example response:<span class="signature">(_id, title, description, director, genre, ImagePath, Featured, Actors, IMDBRating, ReleaseYear)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    returns json object of topMovies object to user
+endpoint URL: /movies
+GET request
+no required params
+example request:
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>director</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>genre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ImagePath</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Featured</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Actors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>IMDBRating</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ReleaseYear</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line63">line 63</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="handleSubmit=(event)=%3E%7Bevent.preventDefault();axios.post('https://popcorn-movieapp.herokuapp.com/users',%7BUsername:username,Password:password,EMail:email,Birthday:birthday,%7D).then(response=%3E%7Bconstdata=response.data;console.log(data);window.open('/','_self');%7D).catch(e=%3E%7Bconsole.log('errorregisteringtheuser')%7D);%7Dexampleresponse:"><span class="type-signature"></span>handleSubmit = (event) => {
+ event.preventDefault();
+ axios.post('https://popcorn-movieapp.herokuapp.com/users', {
+     Username: username,
+     Password: password,
+     EMail: email,
+     Birthday: birthday,
+ })
+ .then(response => {
+   const data = response.data;
+   console.log(data);
+   window.open('/', '_self');
+ })
+ .catch(e => {
+   console.log('error registering the user')
+ });
+}
+example response:<span class="signature">(user)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    create new user
+endpoint URL: /users
+POST request
+params required:
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line249">line 249</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="handleSubmit(event)%7Bevent.preventDefault();console.log(this.state.username);axios.put(%60https://popcorn-movieapp.herokuapp.com/users/$%7BlocalStorage.getItem('user')%7D%60,%7BUsername:this.state.usernameForm,Password:this.state.passwordForm,EMail:this.state.emailForm,Birthday:this.state.birthdayForm%7D,%7Bheaders:%7BAuthorization:%60Bearer$%7BlocalStorage.getItem('token')%7D%60%7D%7D).then(response=%3E%7Bconsole.log(response);alert('Yourdatahasbeenupdated!');//updatelocalStoragelocalStorage.setItem('user',this.state.usernameForm);//callgetUser()todusplaychangeduserdataaftersubmissionthis.getUser(localStorage.getItem('token'));//resetformaftersubmittingdatadocument.getElementsByClassName('changeDataForm')%5B0%5D.reset();%7D).catch(event=%3E%7Bconsole.log('errorupdatingtheuserdata');alert('Ooooops...Somethingwentwrong!');%7D);%7D;exampleresponse:"><span class="type-signature"></span>handleSubmit(event) {
+ event.preventDefault();
+ console.log(this.state.username);
+ axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
+   Username: this.state.usernameForm,
+   Password: this.state.passwordForm,
+   EMail: this.state.emailForm,
+   Birthday: this.state.birthdayForm
+ }, {
+   headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+ })
+ .then(response => {
+   console.log(response);
+   alert('Your data has been updated!');
+   //update localStorage
+   localStorage.setItem('user', this.state.usernameForm);
+   // call getUser() to dusplay changed userdata after submission
+   this.getUser(localStorage.getItem('token'));
+   // reset form after submitting data
+   document.getElementsByClassName('changeDataForm')[0].reset();
+ })
+ .catch(event => {
+   console.log('error updating the userdata');
+   alert('Ooooops... Something went wrong!');
+ });
+};
+example response:<span class="signature">(JSON)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    update the user info (username, password, email, date of birth) by username
+endpoint URL: /users/:username
+PUT request
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>JSON</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line356">line 356</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#deleteMovie(event,favoriteMovie)%257Bevent.preventDefault();console.log(favoriteMovie);axios.delete(%2560https://popcorn-movieapp.herokuapp.com/users/$%257BlocalStorage.getItem('user')%257D/movies/$%257BfavoriteMovie%257D%2560,%257Bheaders:%257BAuthorization:%2560Bearer$%257BlocalStorage.getItem('token')%257D%2560%257D%257D).then(response=%253E%257B//updatestatewithcurrentmoviedatathis.getUser(localStorage.getItem('token'));%257D).catch(event=%253E%257Balert('Oops...somethingwentwrong...');%257D);%257Dexampleresponse:Atextmessageindicatingwhetherthemoviewassuccessfullyremoved.">deleteMovie(event, favoriteMovie) {
+ event.preventDefault();
+ console.log(favoriteMovie);
+ axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${favoriteMovie}`, {
+   headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+ })
+ .then(response => {
+   // update state with current movie data
+   this.getUser(localStorage.getItem('token'));
+ })
+ .catch(event => {
+   alert('Oops... something went wrong...');
+ });
+}
+example response:
+A text message indicating whether the movie was successfully removed.</a></li><li><a href="global.html#getMovies(token)%257Baxios.get('https://popcorn-movieapp.herokuapp.com/movies',%257Bheaders:%257BAuthorization:%2560Bearer$%257Btoken%257D%2560%257D%257D).then(response=%253E%257Bthis.props.setMovies(response.data);localStorage.setItem('movies',JSON.stringify(response.data));%257D).catch(function(error)%257Bconsole.log(error);%257D);%257Dexampleresponse:">getMovies(token) {
+   axios.get('https://popcorn-movieapp.herokuapp.com/movies', {
+     headers: { Authorization: `Bearer ${token}` }
+   })
+   .then(response => {
+     this.props.setMovies(response.data);
+     localStorage.setItem('movies', JSON.stringify(response.data));
+   })
+   .catch(function(error) {
+     console.log(error);
+   });
+  }
+example response:</a></li><li><a href="global.html#handleSubmit=(event)=%253E%257Bevent.preventDefault();axios.post('https://popcorn-movieapp.herokuapp.com/users',%257BUsername:username,Password:password,EMail:email,Birthday:birthday,%257D).then(response=%253E%257Bconstdata=response.data;console.log(data);window.open('/','_self');%257D).catch(e=%253E%257Bconsole.log('errorregisteringtheuser')%257D);%257Dexampleresponse:">handleSubmit = (event) => {
+ event.preventDefault();
+ axios.post('https://popcorn-movieapp.herokuapp.com/users', {
+     Username: username,
+     Password: password,
+     EMail: email,
+     Birthday: birthday,
+ })
+ .then(response => {
+   const data = response.data;
+   console.log(data);
+   window.open('/', '_self');
+ })
+ .catch(e => {
+   console.log('error registering the user')
+ });
+}
+example response:</a></li><li><a href="global.html#handleSubmit(event)%257Bevent.preventDefault();console.log(this.state.username);axios.put(%2560https://popcorn-movieapp.herokuapp.com/users/$%257BlocalStorage.getItem('user')%257D%2560,%257BUsername:this.state.usernameForm,Password:this.state.passwordForm,EMail:this.state.emailForm,Birthday:this.state.birthdayForm%257D,%257Bheaders:%257BAuthorization:%2560Bearer$%257BlocalStorage.getItem('token')%257D%2560%257D%257D).then(response=%253E%257Bconsole.log(response);alert('Yourdatahasbeenupdated!');//updatelocalStoragelocalStorage.setItem('user',this.state.usernameForm);//callgetUser()todusplaychangeduserdataaftersubmissionthis.getUser(localStorage.getItem('token'));//resetformaftersubmittingdatadocument.getElementsByClassName('changeDataForm')%255B0%255D.reset();%257D).catch(event=%253E%257Bconsole.log('errorupdatingtheuserdata');alert('Ooooops...Somethingwentwrong!');%257D);%257D;exampleresponse:">handleSubmit(event) {
+ event.preventDefault();
+ console.log(this.state.username);
+ axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
+   Username: this.state.usernameForm,
+   Password: this.state.passwordForm,
+   EMail: this.state.emailForm,
+   Birthday: this.state.birthdayForm
+ }, {
+   headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+ })
+ .then(response => {
+   console.log(response);
+   alert('Your data has been updated!');
+   //update localStorage
+   localStorage.setItem('user', this.state.usernameForm);
+   // call getUser() to dusplay changed userdata after submission
+   this.getUser(localStorage.getItem('token'));
+   // reset form after submitting data
+   document.getElementsByClassName('changeDataForm')[0].reset();
+ })
+ .catch(event => {
+   console.log('error updating the userdata');
+   alert('Ooooops... Something went wrong!');
+ });
+};
+example response:</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sun Oct 27 2019 04:21:58 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
