@@ -50,83 +50,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#deleteMovie(event,favoriteMovie)%257Bevent.preventDefault();console.log(favoriteMovie);axios.delete(%2560https://popcorn-movieapp.herokuapp.com/users/$%257BlocalStorage.getItem('user')%257D/movies/$%257BfavoriteMovie%257D%2560,%257Bheaders:%257BAuthorization:%2560Bearer$%257BlocalStorage.getItem('token')%257D%2560%257D%257D).then(response=%253E%257B//updatestatewithcurrentmoviedatathis.getUser(localStorage.getItem('token'));%257D).catch(event=%253E%257Balert('Oops...somethingwentwrong...');%257D);%257Dexampleresponse:Atextmessageindicatingwhetherthemoviewassuccessfullyremoved.">deleteMovie(event, favoriteMovie) {
- event.preventDefault();
- console.log(favoriteMovie);
- axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${favoriteMovie}`, {
-   headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
- })
- .then(response => {
-   // update state with current movie data
-   this.getUser(localStorage.getItem('token'));
- })
- .catch(event => {
-   alert('Oops... something went wrong...');
- });
-}
-example response:
-A text message indicating whether the movie was successfully removed.</a></li><li><a href="global.html#getMovies(token)%257Baxios.get('https://popcorn-movieapp.herokuapp.com/movies',%257Bheaders:%257BAuthorization:%2560Bearer$%257Btoken%257D%2560%257D%257D).then(response=%253E%257Bthis.props.setMovies(response.data);localStorage.setItem('movies',JSON.stringify(response.data));%257D).catch(function(error)%257Bconsole.log(error);%257D);%257Dexampleresponse:">getMovies(token) {
-   axios.get('https://popcorn-movieapp.herokuapp.com/movies', {
-     headers: { Authorization: `Bearer ${token}` }
-   })
-   .then(response => {
-     this.props.setMovies(response.data);
-     localStorage.setItem('movies', JSON.stringify(response.data));
-   })
-   .catch(function(error) {
-     console.log(error);
-   });
-  }
-example response:</a></li><li><a href="global.html#handleSubmit=(event)=%253E%257Bevent.preventDefault();axios.post('https://popcorn-movieapp.herokuapp.com/users',%257BUsername:username,Password:password,EMail:email,Birthday:birthday,%257D).then(response=%253E%257Bconstdata=response.data;console.log(data);window.open('/','_self');%257D).catch(e=%253E%257Bconsole.log('errorregisteringtheuser')%257D);%257Dexampleresponse:">handleSubmit = (event) => {
- event.preventDefault();
- axios.post('https://popcorn-movieapp.herokuapp.com/users', {
-     Username: username,
-     Password: password,
-     EMail: email,
-     Birthday: birthday,
- })
- .then(response => {
-   const data = response.data;
-   console.log(data);
-   window.open('/', '_self');
- })
- .catch(e => {
-   console.log('error registering the user')
- });
-}
-example response:</a></li><li><a href="global.html#handleSubmit(event)%257Bevent.preventDefault();console.log(this.state.username);axios.put(%2560https://popcorn-movieapp.herokuapp.com/users/$%257BlocalStorage.getItem('user')%257D%2560,%257BUsername:this.state.usernameForm,Password:this.state.passwordForm,EMail:this.state.emailForm,Birthday:this.state.birthdayForm%257D,%257Bheaders:%257BAuthorization:%2560Bearer$%257BlocalStorage.getItem('token')%257D%2560%257D%257D).then(response=%253E%257Bconsole.log(response);alert('Yourdatahasbeenupdated!');//updatelocalStoragelocalStorage.setItem('user',this.state.usernameForm);//callgetUser()todusplaychangeduserdataaftersubmissionthis.getUser(localStorage.getItem('token'));//resetformaftersubmittingdatadocument.getElementsByClassName('changeDataForm')%255B0%255D.reset();%257D).catch(event=%253E%257Bconsole.log('errorupdatingtheuserdata');alert('Ooooops...Somethingwentwrong!');%257D);%257D;exampleresponse:">handleSubmit(event) {
- event.preventDefault();
- console.log(this.state.username);
- axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
-   Username: this.state.usernameForm,
-   Password: this.state.passwordForm,
-   EMail: this.state.emailForm,
-   Birthday: this.state.birthdayForm
- }, {
-   headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
- })
- .then(response => {
-   console.log(response);
-   alert('Your data has been updated!');
-   //update localStorage
-   localStorage.setItem('user', this.state.usernameForm);
-   // call getUser() to dusplay changed userdata after submission
-   this.getUser(localStorage.getItem('token'));
-   // reset form after submitting data
-   document.getElementsByClassName('changeDataForm')[0].reset();
- })
- .catch(event => {
-   console.log('error updating the userdata');
-   alert('Ooooops... Something went wrong!');
- });
-};
-example response:</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createNewUser">createNewUser</a></li><li><a href="global.html#deleteMovie">deleteMovie</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#updateUserData">updateUserData</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sun Oct 27 2019 04:21:58 GMT+0100 (GMT+01:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Mon Oct 28 2019 05:38:57 GMT+0100 (GMT+01:00)
 </footer>
 
 <script> prettyPrint(); </script>

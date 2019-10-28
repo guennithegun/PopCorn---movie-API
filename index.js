@@ -61,12 +61,15 @@ app.use(function (err, req, res, next) {
 /////////////
 
 /**
-* returns json object of topMovies object to user
-* endpoint URL: /movies
-* GET request
+* returns json object of topMovies object to user <br>
+* endpoint URL: /movies <br>
+* GET request <br>
 * no required params
-* example request:
-*@function getMovies(token) {
+* @method getMovies
+* @param {string} endpoint
+* @param {function} authorization
+* @example call the method:
+* getMovies(token) {
 *    axios.get('https://popcorn-movieapp.herokuapp.com/movies', {
 *      headers: { Authorization: `Bearer ${token}` }
 *    })
@@ -78,17 +81,28 @@ app.use(function (err, req, res, next) {
 *      console.log(error);
 *    });
 *   }
-* example response:
-* @param {string} _id
-* @param {string} title
-* @param {string} description
-* @param {object} director
-* @param {object} genre
-* @param {string} ImagePath
-* @param {string} Featured
-* @param {object} Actors
-* @param {string} IMDBRating
-* @param {string} ReleaseYear
+* @example example response of method:
+* {
+id : 1,
+Title : 'Snatch',
+Description: 'Unscrupulous boxing promoters, violent bookmakers, a Russian gangster, incompetent amateur robbers and supposedly Jewish jewelers fight to track down a priceless stolen diamond.’,
+Genre: {
+Name: 'Comedy'
+Description: 'Comedy is a genre of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect.'
+},
+Director : {
+Name : 'Guy Ritchie',
+Bio : 'Guy Stuart Ritchie is an english filmmaker and businessman, known for his crime films.',
+Birth : '1968',
+Death : 'n/a',
+Movies: [ 'Snatch', 'Lock, Stock & Two Smoking Barrels', 'Sherlock Holmes' ]
+},
+ImagePath: 'https://www.imdb.com/title/tt0208092/mediaviewer/rm1248859904',
+Featured: true,
+Actors: [ 'Brad Pitt', 'Jason Statham', 'Vinnie Jones', 'Benicio del Toro' ],
+IMDBRating: '8.3',
+ReleaseYear: '2000'
+}
 */
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
@@ -205,12 +219,14 @@ app.post('/movies', passport.authenticate('jwt', { session: false }), (req, res)
 });
 
 /**
-* deletes a movie from the topMovies list by name
-* endpoint URL: /movies/:title
+* deletes a movie from the topMovies list by name <br>
+* endpoint URL: /movies/:title <br>
 * DELETE request
-* @params {string} title
-* example request:
-* @function deleteMovie(event, favoriteMovie) {
+* @method deleteMovie
+* @param {string} endpoint
+* @param {function} authorization
+* @example calling the method:
+* deleteMovie(event, favoriteMovie) {
 *  event.preventDefault();
 *  console.log(favoriteMovie);
 *  axios.delete(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}/movies/${favoriteMovie}`, {
@@ -224,8 +240,8 @@ app.post('/movies', passport.authenticate('jwt', { session: false }), (req, res)
 *    alert('Oops... something went wrong...');
 *  });
 * }
-* example response:
-* A text message indicating whether the movie was successfully removed.
+* @example example response:
+* Snatch was deleted
 */
 app.delete('/movies/:title', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOneAndRemove({ Title : req.params.title})
@@ -247,20 +263,19 @@ app.delete('/movies/:title', passport.authenticate('jwt', { session: false }), (
 /////////////
 
 /**
-* create new user
-* endpoint URL: /users
+* create new user <br>
+* endpoint URL: /users <br>
 * POST request
-* params required:
-* @params {string} username
-* @params {string} password
-* @params {string} email
-* example request:
-* @function handleSubmit = (event) => {
+* @method createNewUser
+* @param {string} endpoint
+* @param {object} userData
+* @example call method:
+* handleSubmit = (event) => {
 *  event.preventDefault();
 *  axios.post('https://popcorn-movieapp.herokuapp.com/users', {
-*      Username: username,
-*      Password: password,
-*      EMail: email,
+*      Username: username, // required
+*      Password: password, // required
+*      EMail: email, // required
 *      Birthday: birthday,
 *  })
 *  .then(response => {
@@ -272,13 +287,14 @@ app.delete('/movies/:title', passport.authenticate('jwt', { session: false }), (
 *    console.log('error registering the user')
 *  });
 * }
-* example response:
-* @param {object} user
-* @params {string} _id
-* @params {string} Username
-* @params {string} Password
-* @params {string} EMail
-* @params {date} Birthday
+* @example example response:
+* {
+id : '2',
+Username: ‚Peter Polanski‘,
+Password: ‚XXXXXXX‘,
+EMail: ‚polanski@example.com',
+Birthday: '1985-04-20T00:00:00Z'
+}
 */
 app.post('/users', (req, res) => {
   // server-side Input validation
@@ -352,17 +368,16 @@ app.delete('/users/:username', passport.authenticate('jwt', { session: false }),
   });
 });
 
-// update the user info (username, password, email, date of birth) by username
 /**
-* update the user info (username, password, email, date of birth) by username
-* endpoint URL: /users/:username
+* update the user info (username, password, email, date of birth) by username <br>
+* endpoint URL: /users/:username <br>
 * PUT request
-* @params {string} Username
-* @params {string} Password
-* @params {string} EMail
-* @params {date} Birthday
-* example request:
-* @function handleSubmit(event) {
+* @method updateUserData
+* @param {string} endpoint
+* @param {function} authorization
+* @param {object} newUserData
+* @example calling the method:
+* handleSubmit(event) {
 *  event.preventDefault();
 *  console.log(this.state.username);
 *  axios.put(`https://popcorn-movieapp.herokuapp.com/users/${localStorage.getItem('user')}`, {
@@ -388,11 +403,12 @@ app.delete('/users/:username', passport.authenticate('jwt', { session: false }),
 *    alert('Ooooops... Something went wrong!');
 *  });
 * };
-* example response:
-* @param {object} JSON object
-* @params {string} n
-* @params {string} nModified
-* @params {string} ok
+* @example example response:
+* {
+n: 1,
+nModified: 1,
+ok: 1
+}
 */
 app.put('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
   // server-side Input validation
